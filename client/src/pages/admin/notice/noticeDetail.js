@@ -83,7 +83,7 @@ const NoticeDetail = () => {
                       <div
                         className="btn btn-primary"
                         onClick={() => {
-                          navigate(`/admin/dashboard/update-teacher/${e._id}`);
+                          navigate(`/admin/dashboard/update-notice/${e._id}`);
                         }}>
                         Update
                       </div>

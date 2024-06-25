@@ -22,6 +22,7 @@ import Test from "./pages/test.";
 import NoticeBoard from "./pages/noticeBoard";
 import AddNotice from "./pages/admin/notice/addNotice";
 import NoticeDetail from "./pages/admin/notice/noticeDetail";
+import UpdateNotice from "./pages/admin/notice/updateNotice";
 function App() {
   return (
     <>
@@ -37,6 +38,7 @@ function App() {
           <Route path="dashboard/update-teacher/:id" element={<UpdateTeacher/>} />
           <Route path="dashboard/teacher-Full-Detail/:id" element={<TeacherFullDetail/>} />
           <Route path="dashboard/add-notice" element={<AddNotice />} />
+          <Route path="dashboard/update-notice/:id" element={<UpdateNotice />} />
           <Route path="dashboard/notice-detail" element={<NoticeDetail />} />
         </Route>
 

@@ -128,3 +128,33 @@ export const updateNoticeController = async (req, res) => {
     });
   }
 };
+
+// get photo
+export const getPhotoController=async(req,res)=>{
+  try {
+    const id=req.params.id;
+    const photo=await noticeModel.findById(id).select('photo');
+    const img=photo?.photo
+    if(photo?.photo){
+      res.status(200).send({
+        success:true,
+        message:'successFully getting photo',
+        photo
+      })
+    }else{
+      res.status(400).send({
+        success:true,
+        message:' No photo uploaded',
+      })
+    }
+    
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success:false,
+      message:'error in trycatch block',
+      error
+    })
+    
+  }
+}

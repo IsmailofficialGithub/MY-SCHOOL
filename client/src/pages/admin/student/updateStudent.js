@@ -80,7 +80,7 @@ const UpdateStudent = () => {
 
             <div className="col-8">
               <div className="container mt-3 w-75">
-                <h4 className="text-center mb-3">Enter Detail To Add a Student</h4>
+                <h4 className="text-center mb-3">Enter Detail To Update a Student</h4>
                 <form>
                   <div>
                     <div className="mb-3">
