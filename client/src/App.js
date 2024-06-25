@@ -1,0 +1,57 @@
+import logo from "./logo.svg";
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./pages/Homepage";
+import Register from "./pages/register";
+import Login from "./pages/login";
+import PageNotFound from "./pages/404";
+import AboutUs from "./pages/about";
+import Contact from "./pages/contact";
+import Qna from "./pages/qna";
+import PrivateRoute from "./pages/components/privateRoute";
+import AdminDashboard from "./pages/admin/adminDashboard";
+import StudentDetail from "./pages/admin/student/StudentDetail";
+import AddStudent from "./pages/admin/student/add-student";
+import UpdateStudent from "./pages/admin/student/updateStudent";
+import StudentFullDetail from "./pages/admin/student/StudentFullDetail";
+import AddTeacher from "./pages/admin/teacher/add-teacher";
+import TeacherDetail from "./pages/admin/teacher/teacherDetail";
+import UpdateTeacher from "./pages/admin/teacher/updateTeacher";
+import TeacherFullDetail from "./pages/admin/teacher/teacherFullDetail";
+import Test from "./pages/test.";
+import NoticeBoard from "./pages/noticeBoard";
+import AddNotice from "./pages/admin/notice/addNotice";
+import NoticeDetail from "./pages/admin/notice/noticeDetail";
+function App() {
+  return (
+    <>
+      <Routes>
+        <Route path="/admin" element={<PrivateRoute />}>
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="dashboard/Student-detail" element={<StudentDetail />} />
+          <Route path="dashboard/update-detail/:id" element={<UpdateStudent/>} />
+          <Route path="dashboard/fullStudent-detail/:id" element={<StudentFullDetail/>} />
+          <Route path="dashboard/add-student" element={<AddStudent />} />
+          <Route path="dashboard/add-teacher" element={<AddTeacher />} />
+          <Route path="dashboard/teacher-detail" element={<TeacherDetail />} />
+          <Route path="dashboard/update-teacher/:id" element={<UpdateTeacher/>} />
+          <Route path="dashboard/teacher-Full-Detail/:id" element={<TeacherFullDetail/>} />
+          <Route path="dashboard/add-notice" element={<AddNotice />} />
+          <Route path="dashboard/notice-detail" element={<NoticeDetail />} />
+        </Route>
+
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/notice-board" element={<NoticeBoard />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="*" element={<PageNotFound />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/qna" element={<Qna />} />
+        <Route path="/test" element={<Test />} />
+      </Routes>
+    </>
+  );
+}
+
+export default App;
