@@ -52,3 +52,8 @@ Certainly! Here are the important elements to include specifically in the notice
 - **Back to Notices List Link**
 
 By including these elements, your notice section will be comprehensive, easy to navigate, and effective in communicating important information to your school community.
+
+
+// git add .
+//git commit -m "Resolve merge conflicts"
+git push origin main
