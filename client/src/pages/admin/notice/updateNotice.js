@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
 import AdminSide from '../../components/adminSide'
 import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 const UpdateNotice = () => {
      const params=useParams()
@@ -10,6 +11,22 @@ const UpdateNotice = () => {
      const [date,setDate]=useState('')
      const [catagory,setCatagory]=useState('')
      const [photo,setPhoto]=useState('')
+
+     const getData=async()=>{
+          try {
+               const {data}=await axios.get(`http://localhost:5000/api/v1/notice/getSingleNotice/${params.id}`)
+               setTitle(data?.data.title)
+               setDescription(data?.data.description)
+               setDate(data?.data.date)
+               setCatagory(data?.data.catagory)
+          } catch (error) {
+               console.log(error)
+               
+          }
+     }
+     useEffect(()=>{
+      getData()
+     },[])
   return (
      <Layout>
      <>
@@ -50,7 +67,7 @@ const UpdateNotice = () => {
                    </div>
                    <div className="mb-3">
                      <input
-                       type="number"
+                       type="text"
                        className="form-control"
                        placeholder="Enter catagory"
                        required
@@ -60,9 +77,9 @@ const UpdateNotice = () => {
                        }}
                      />
                    </div>
-                   <div className="mb-3">
+                   {date != '1'?<div className="mb-3">
                      <input
-                       type="number"
+                       type="date"
                        className="form-control"
                        placeholder="Enter Phone no"
                        required
@@ -71,7 +88,9 @@ const UpdateNotice = () => {
                          setDate(e.target.value);
                        }}
                      />
-                   </div>
+                   </div>:
+              'Unlimited'                   
+                   }
                  
                    
                    <div className="mb-3">
@@ -83,7 +102,7 @@ const UpdateNotice = () => {
                      ):
                      (
                        <div className="text-center">
-                         <img src={`http://localhost:5000/api/v1/notice/get-photo/${params.id}`} alt="photo" className="img img-responsive" height={"200px"} />
+                         <img src={`http://localhost:5000/api/v1/notice/get-photo/${params.id}`} alt="NO PHOTO IS ADDED" className="img img-responsive" height={"200px"} />
                        </div>
                        
                      )

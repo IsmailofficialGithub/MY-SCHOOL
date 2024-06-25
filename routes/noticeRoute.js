@@ -1,5 +1,5 @@
 import express from 'express';
-import { addNoticeController, deleteNoticeController, getNoticeController, getPhotoController, updateNoticeController } from '../controller/noticeController.js';
+import { addNoticeController, deleteNoticeController, getNoticeController, getPhotoController, getSingleNoticeController, updateNoticeController } from '../controller/noticeController.js';
 import formidable from 'express-formidable';
 import { setupCronJob } from "../helper/time.js";
 
@@ -14,8 +14,11 @@ router.get('/getNotice',getNoticeController)
 router.delete('/deleteNotice/:id',deleteNoticeController)
 //update notice
 router.post('/updateNotice/:id',formidable(),updateNoticeController)
-//fet photo
+//get photo
 router.get('/get-photo/:id',getPhotoController)
+// get single notice
+router.get('/getSingleNotice/:id',getSingleNoticeController)
+
 
 
 export default router;

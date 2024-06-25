@@ -158,3 +158,25 @@ export const getPhotoController=async(req,res)=>{
     
   }
 }
+
+// get single notice
+export const getSingleNoticeController=async(req,res)=>{
+  try {
+    const data=await noticeModel.findById(req.params.id);
+    if(data){
+      res.status(200).send({
+        success:true,
+        message:'SuccessFully getting data',
+        data,
+      })
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success:false,
+      message:'error in TRy catch block',
+      error,
+    })
+    
+  }
+}
