@@ -3,6 +3,7 @@ import Layout from '../../components/Layout'
 import AdminSide from '../../components/adminSide'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 const UpdateNotice = () => {
      const params=useParams()
@@ -19,11 +20,39 @@ const UpdateNotice = () => {
                setDescription(data?.data.description)
                setDate(data?.data.date)
                setCatagory(data?.data.catagory)
+               setPhoto(data?.data.photo)
           } catch (error) {
+            window.location.reload()
                console.log(error)
+
+               
                
           }
      }
+     const handleSubmit=async(e)=>{
+      e.preventDefault();
+    
+      
+      try {
+        const updateData=new FormData();
+        updateData.append('title',title)
+        updateData.append('description',description)
+        updateData.append('catagory',catagory)
+        updateData.append('date',date)
+        updateData.append('photo',photo)
+        const {data}=await axios.post(`http://localhost:5000/api/v1/notice/updateNotice/${params.id}`,updateData)
+        if(data.success){
+          toast.success('update data successfully')
+        }
+        
+      } catch (error) {
+        console.log(error)
+        window.location.reload()
+
+        
+      }
+     }
+
      useEffect(()=>{
       getData()
      },[])
@@ -57,18 +86,6 @@ const UpdateNotice = () => {
                      <input
                        type="text"
                        className="form-control"
-                       placeholder="Enter description"
-                       required
-                       value={description}
-                       onChange={(e) => {
-                         setDescription(e.target.value);
-                       }}
-                     />
-                   </div>
-                   <div className="mb-3">
-                     <input
-                       type="text"
-                       className="form-control"
                        placeholder="Enter catagory"
                        required
                        value={catagory}
@@ -76,6 +93,20 @@ const UpdateNotice = () => {
                          setCatagory(e.target.value);
                        }}
                      />
+                   </div>
+
+                   <div className="mb-3">
+                    <textarea cols='30' rows='10' 
+                     type="text"
+                     className="form-control"
+                     placeholder="Enter description"
+                     required
+                     value={description}
+                     onChange={(e) => {
+                       setDescription(e.target.value);
+                     }}> 
+                    
+                    </textarea>
                    </div>
                    {date != '1'?<div className="mb-3">
                      <input
@@ -122,7 +153,7 @@ const UpdateNotice = () => {
                      </label>
                    </div>
 
-                   <button className="btn btn-primary">Update</button>
+                   <button className="btn btn-primary" onClick={handleSubmit}>Update</button>
                  </div>
                </form>
              </div>

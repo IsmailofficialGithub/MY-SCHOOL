@@ -13,6 +13,8 @@ const NoticeBoard = () => {
       }
     } catch (error) {
       console.log(error)
+      window.location.reload()
+
       
     }
   }
@@ -33,10 +35,10 @@ useEffect(()=>{
 
        {notice?.map((e)=>(
            <div className="card" style={{width: '15rem'}}>
-           <img src="https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.cLFYh5JgUcvbxNL4oz9WjAHaGF%26pid%3DApi&sp=1719212197T1442df5ad054077fdf6c16e11b0b65e8aa7e80b717acd77defa54a8c007f44db" className="card-img-top" alt="..." />
+           <img src={`http://localhost:5000/api/v1/notice/get-photo/${e._id}`} className="card-img-top" alt="..." />
            <div className="card-body">
              <h5 className="card-title">{e.title}</h5>
-             <p className="card-text">{e.description}</p>
+             <p className="card-text">{e.description.split(" ").slice(0, 16).join(" ")}...</p>
              <Link to={'/'} className="btn btn-primary">More Detail</Link>
            </div>
          </div>

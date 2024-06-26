@@ -133,14 +133,11 @@ export const updateNoticeController = async (req, res) => {
 export const getPhotoController=async(req,res)=>{
   try {
     const id=req.params.id;
-    const photo=await noticeModel.findById(id).select('photo');
-    const img=photo?.photo
-    if(photo?.photo){
-      res.status(200).send({
-        success:true,
-        message:'successFully getting photo',
-        photo
-      })
+    const notice=await noticeModel.findById(id).select('photo');
+    if(notice?.photo.data){
+      res.set("Content-type", notice.photo.contentType);
+      return res.status(200).send(notice.photo.data);
+
     }else{
       res.status(400).send({
         success:true,
@@ -162,7 +159,7 @@ export const getPhotoController=async(req,res)=>{
 // get single notice
 export const getSingleNoticeController=async(req,res)=>{
   try {
-    const data=await noticeModel.findById(req.params.id);
+    const data=await noticeModel.findById(req.params.id).select('-photo');
     if(data){
       res.status(200).send({
         success:true,
