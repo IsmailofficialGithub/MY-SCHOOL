@@ -23,6 +23,7 @@ import NoticeBoard from "./pages/noticeBoard";
 import AddNotice from "./pages/admin/notice/addNotice";
 import NoticeDetail from "./pages/admin/notice/noticeDetail";
 import UpdateNotice from "./pages/admin/notice/updateNotice";
+import NoticeDetailFull from "./pages/admin/notice/noticeDetailFull";
 function App() {
   return (
     <>
@@ -40,6 +41,7 @@ function App() {
           <Route path="dashboard/add-notice" element={<AddNotice />} />
           <Route path="dashboard/update-notice/:id" element={<UpdateNotice />} />
           <Route path="dashboard/notice-detail" element={<NoticeDetail />} />
+          <Route path="dashboard/notice-Full-Detail/:id" element={<NoticeDetailFull />} />
         </Route>
 
         <Route path="/" element={<HomePage />} />

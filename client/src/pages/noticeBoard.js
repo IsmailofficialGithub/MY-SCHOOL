@@ -36,7 +36,7 @@ useEffect(()=>{
        {notice?.map((e)=>(
            <div className="card" style={{width: '15rem'}}>
            <img src={`http://localhost:5000/api/v1/notice/get-photo/${e._id}`} className="card-img-top" alt="..." />
-           <div className="card-body">
+           <div className="card-body"  style={{textTransform:'capitalize'}}>
              <h5 className="card-title">{e.title}</h5>
              <p className="card-text">{e.description.split(" ").slice(0, 16).join(" ")}...</p>
              <Link to={'/'} className="btn btn-primary">More Detail</Link>

@@ -4,8 +4,10 @@ import AdminSide from '../../components/adminSide'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 const UpdateNotice = () => {
+  const navigate=useNavigate();
      const params=useParams()
      const [title,setTitle]=useState('')
      const [description,setDescription]=useState('')
@@ -21,6 +23,7 @@ const UpdateNotice = () => {
                setDate(data?.data.date)
                setCatagory(data?.data.catagory)
                setPhoto(data?.data.photo)
+              
           } catch (error) {
             window.location.reload()
                console.log(error)
@@ -41,8 +44,12 @@ const UpdateNotice = () => {
         updateData.append('date',date)
         updateData.append('photo',photo)
         const {data}=await axios.post(`http://localhost:5000/api/v1/notice/updateNotice/${params.id}`,updateData)
+
         if(data.success){
-          toast.success('update data successfully')
+         navigate('/admin/dashboard/notice-detail')
+         setTimeout(()=>{
+          toast.success('Data Updated SuccessFully')
+         },100)
         }
         
       } catch (error) {

@@ -47,6 +47,7 @@ const NoticeDetail = () => {
   return (
     <Layout>
       <>
+        <div className="container">
         <div className="row">
           <div className="col-4 ">
             <AdminSide />
@@ -59,7 +60,7 @@ const NoticeDetail = () => {
                   <th scope="col">#</th>
                   <th scope="col">Title</th>
                   <th scope="col">Description</th>
-                  <th scope="col">catagory</th>
+                  {/* <th scope="col">catagory</th> */}
                   <th scope="col">Valid for</th>
                   <th scope="col">Modify</th>
                 </tr>
@@ -69,14 +70,14 @@ const NoticeDetail = () => {
                   <tr>
                     <th scope="row">{index + 1}</th>
                     <td>{e.title}</td>
-                    <td>{e.description.split(" ").slice(0, 4).join(" ")}...</td>
-                    <td>{e.catagory}</td>
+                    <td>{e.description.split(" ").slice(0, 2).join(" ")}...</td>
+                    {/* <td>{e.catagory}</td> */}
                     <td>{e.date != 1 ? e.date : "Unlimited"}</td>
                     <td>
                       <div
                         className="btn btn-secondary m-1"
                         onClick={() => {
-                          navigate(`/admin/dashboard/teacher-Full-Detail/${e._id}`);
+                          navigate(`/admin/dashboard/notice-Full-Detail/${e._id}`);
                         }}>
                         Details
                       </div>
@@ -97,9 +98,10 @@ const NoticeDetail = () => {
                     </td>
                   </tr>
                 ))}
-              </tbody>
+                </tbody>
             </table>
           </div>
+      </div>
         </div>
       </>
     </Layout>

@@ -39,104 +39,107 @@ const AddNotice = () => {
   return (
     <Layout>
       <>
-        <div className="row">
-          <div className="col-4 ">
-            <AdminSide />
-          </div>
+        <div className="container">
+          <div className="row">
+            <div className="col-4 ">
+              <AdminSide />
+            </div>
 
-          <div className="col-8">
-            <div className="container mt-3 w-75">
-              <h4 className="text-center mb-3">Enter Detail To Add a Student</h4>
-              <form>
-                <div>
-                  <div className="mb-3">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Title"
-                      value={title}
-                      onChange={(e) => {
-                        setTitle(e.target.value);
-                      }}
-                      required
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <textarea
-                      cols="30"
-                      rows="10"
-                      type="text"
-                      className="form-control"
-                      placeholder="Description"
-                      value={description}
-                      onChange={(e) => {
-                        setDescription(e.target.value);
-                      }}
-                      required></textarea>
-                  </div>
-                  <div className="mb-3">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Category"
-                      value={catagory}
-                      onChange={(e) => {
-                        setCatagory(e.target.value);
-                      }}
-                      required
-                    />
-                  </div>
-                  <label> Valid For</label>
-                  <div
-                    className="unlimited-btn"
-                    onClick={() => {
-                      setDate(date === "1" ? "" : "1");
-                    }}>
-                    {" "}
-                    {date != 1 ? "Unlimited" : "Set Time"}
-                  </div>
-                  {date != 1 ? (
+            <div className="col-8">
+              <div className="container mt-3 w-75">
+                <h4 className="text-center mb-3">Enter Detail To Add a Student</h4>
+                <form>
+                  <div>
                     <div className="mb-3">
                       <input
-                        type="date"
+                        type="text"
                         className="form-control"
-                        placeholder="date"
+                        placeholder="Title"
+                        value={title}
                         onChange={(e) => {
-                          setDate(e.target.value);
+                          setTitle(e.target.value);
                         }}
                         required
                       />
                     </div>
-                  ) : (
-                    ""
-                  )}
-
-                  <div className="mb-3">
-                    <label className="btn btn-outline-secondary col-mb-12">
-                      {photo ? photo.name : "Upload photo"}
-                      <input
-                        type="file"
-                        name="photo"
-                        accept="images/*"
+                    <div className="mb-3">
+                      <textarea
+                        cols="30"
+                        rows="10"
+                        type="text"
+                        className="form-control"
+                        placeholder="Description"
+                        value={description}
                         onChange={(e) => {
-                          setPhoto(e.target.files[0]);
+                          setDescription(e.target.value);
                         }}
-                        hidden></input>
-                    </label>
-                  </div>
-                  <div className="mb-3">
-                    {photo && (
-                      <div className="text-center">
-                        <img src={URL.createObjectURL(photo)} alt="photo" className="img img-responsive" height={"200px"} />
+                        required></textarea>
+                    </div>
+                    <div className="mb-3">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Category"
+                        value={catagory}
+                        onChange={(e) => {
+                          setCatagory(e.target.value);
+                        }}
+                        required
+                      />
+                    </div>
+                    <label> Valid For</label>
+                    <div
+                      className="unlimited-btn"
+                      onClick={() => {
+                        setDate(date === "1" ? "" : "1");
+                      }}>
+                      {" "}
+                      {date != 1 ? "Unlimited" : "Set Time"}
+                    </div>
+                    {date != 1 ? (
+                      <div className="mb-3">
+                        <input
+                          type="date"
+                          className="form-control"
+                          placeholder="date"
+                          onChange={(e) => {
+                            setDate(e.target.value);
+                          }}
+                          required
+                        />
                       </div>
+                    ) : (
+                      ""
                     )}
-                  </div>
 
-                  <button className="btn btn-primary" onClick={handleSubmit}>
-                    Submit
-                  </button>
-                </div>
-              </form>
+                    <div className="mb-3">
+                      <label className="btn btn-outline-secondary col-mb-12">
+                        {photo ? photo.name : "Upload photo"}
+                        <input
+                          type="file"
+                          name="photo"
+                          accept="images/*"
+                          onChange={(e) => {
+                            setPhoto(e.target.files[0]);
+                          }}
+                          hidden></input>
+                      </label>
+                    </div>
+                    <div className="mb-3">
+                      {photo && (
+                        <div className="text-center">
+                          <img src={URL.createObjectURL(photo)} alt="photo" className="img img-responsive" height={"200px"} />
+                        </div>
+                      )}
+                    </div>
+
+                    <button className="btn btn-primary" onClick={handleSubmit}>
+                      Submit
+                    </button>
+                  </div>
+                </form>
+                {/* </div> */}
+              </div>
             </div>
           </div>
         </div>
