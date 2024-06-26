@@ -8,11 +8,11 @@ const PrivateRoute = () => {
 
      useEffect(() => {
           const student = JSON.parse(localStorage.getItem("auth"));
-          if (student?.user?.role === 0) {
+          if (student?.user?.role === 0 || student?.user?.role === 1) {
             setAdmin(false);
             navigate('/');
            setTimeout(()=>{
-               toast.error('your are not admin')
+               toast.error('Your are not admin')
            },100)
 
           } else {

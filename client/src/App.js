@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/Homepage";
@@ -24,6 +23,8 @@ import AddNotice from "./pages/admin/notice/addNotice";
 import NoticeDetail from "./pages/admin/notice/noticeDetail";
 import UpdateNotice from "./pages/admin/notice/updateNotice";
 import NoticeDetailFull from "./pages/admin/notice/noticeDetailFull";
+import Report from './pages/report'
+import StudentPrivate from "./pages/components/studentPrivate";
 function App() {
   return (
     <>
@@ -44,8 +45,13 @@ function App() {
           <Route path="dashboard/notice-Full-Detail/:id" element={<NoticeDetailFull />} />
         </Route>
 
+        <Route path="/student" element={<StudentPrivate/>}>
+          <Route path="report/:id" element={<Report/>}/>
+        </Route>
+
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
+        {/* <Route path="/report" element={<Report />} /> */}
         <Route path="/notice-board" element={<NoticeBoard />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<PageNotFound />} />

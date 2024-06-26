@@ -6,6 +6,8 @@ const Header = () => {
   const [istoken, setIsToken] = useState(false);
   const [role, setRole] = useState(false);
   const [admin,setAdmin]=useState(false);
+  const [isStudent,setIsStudent]=useState(false);
+  const [userId,setUserId]=useState('')
 
   const handleLogout = () => {
     localStorage.removeItem("auth");
@@ -16,6 +18,7 @@ const Header = () => {
   };
   useEffect(()=>{
     const admin = JSON.parse(localStorage.getItem("auth"));
+    setUserId(admin?.user?._id)
     if (admin?.user?.role === 3) {
       setAdmin(true)
     } else {
@@ -33,13 +36,22 @@ const Header = () => {
     }
   }, []);
   useEffect(() => {
-    const student = JSON.parse(localStorage.getItem("auth"));
-    if (student?.user?.role === 0) {
+    const localUser = JSON.parse(localStorage.getItem("auth"));
+    if (localUser?.user?.role === 0 || localUser?.user?.role === 1) {
       setRole(false);
     } else {
       setRole(true);
     }
   }, []);
+  useEffect(()=>{
+    const student = JSON.parse(localStorage.getItem("auth"));
+    if(student?.user?.role === 1){
+      setIsStudent(true);
+    }else{
+      setIsStudent(false)
+    }
+
+  },[])
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-black d-flex text-white  ">
@@ -79,11 +91,13 @@ const Header = () => {
                       Qna
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <Link className="nav-link text-white" to={"/qna"}>
+                  {isStudent ? (
+                    <li className="nav-item">
+                    <Link className="nav-link text-white" to={`/student/report/${userId}`}>
                       Report
                     </Link>
                   </li>
+                  ):''}
                   {role ? (
                     <li className="nav-item" >
                       <Link className="nav-link text-white" to={`/${admin ? 'admin' :'teacher'}/dashboard`}>
