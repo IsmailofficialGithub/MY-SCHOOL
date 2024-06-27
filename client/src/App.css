@@ -816,3 +816,11 @@ border-radius: 4px;
   margin-bottom: 11px;
   cursor: pointer;
 }
+
+.select-report{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

@@ -12,6 +12,8 @@ const AdminSide = () => {
     <Link to={'/admin/dashboard/add-teacher'} className="col">Add Teacher</Link>
     <Link to={'/admin/dashboard/add-notice'} className="col">Add Notice</Link>
     <Link to={'/admin/dashboard/notice-detail'} className="col">Notice Detail</Link>
+    <Link to={'/admin/dashboard/add-student-report'} className="col">Add Report</Link>
+    <Link to={'/admin/dashboard/report-detail'} className="col">Report Detail</Link>
     
    
    

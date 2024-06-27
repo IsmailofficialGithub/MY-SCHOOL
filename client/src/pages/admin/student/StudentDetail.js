@@ -138,6 +138,7 @@ const StudentDetail = () => {
                       <td>{e.fatherName}</td>
                       <td>{e.grade}</td>
                       <td>
+                       
                         <div
                           className="btn btn-secondary m-1"
                           onClick={() => {
@@ -158,6 +159,9 @@ const StudentDetail = () => {
                             sumbitDelete(e._id);
                           }}>
                           Delete
+                        </div>
+                        <div style={{textDecoration:"underLine",color:'blue',cursor:'pointer'}} >
+                        < span onClick={()=>{navigate('/admin/dashboard/select-report')}}>  Report ↗️</span>
                         </div>
                       </td>
                     </tr>
