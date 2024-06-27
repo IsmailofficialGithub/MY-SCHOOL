@@ -6,6 +6,7 @@ import studentRoute from './routes/studentRoute.js'
 import teacherRoute from './routes/teacherRoute.js';
 import authRoute from './routes/authRoute.js';
 import noticeRoute from './routes/noticeRoute.js';
+import reportRoute from './routes/reportRoute.js'
 import cors from 'cors'
 import morgan from 'morgan';
 
@@ -29,6 +30,7 @@ app.use('/api/v1/auth',authRoute)
 app.use('/api/v1/student',studentRoute)
 app.use('/api/v1/teacher',teacherRoute)
 app.use('/api/v1/notice',noticeRoute)
+app.use('/api/v1/report',reportRoute)
 
 
 
