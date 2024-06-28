@@ -23,7 +23,6 @@ const reportSchema=new mongoose.Schema({
           type:mongoose.ObjectId,
           ref:"students",
           required:true,
-          unique:true
      },
      notification:{
           type:String,

@@ -161,7 +161,7 @@ const StudentDetail = () => {
                           Delete
                         </div>
                         <div style={{textDecoration:"underLine",color:'blue',cursor:'pointer'}} >
-                        < span onClick={()=>{navigate('/admin/dashboard/select-report')}}>  Report ↗️</span>
+                        < span onClick={()=>{navigate(`/admin/dashboard/select-report/${e._id}`)}}>  Report ↗️</span>
                         </div>
                       </td>
                     </tr>

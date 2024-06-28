@@ -45,8 +45,8 @@ function App() {
           <Route path="dashboard/update-notice/:id" element={<UpdateNotice />} />
           <Route path="dashboard/notice-detail" element={<NoticeDetail />} />
           <Route path="dashboard/notice-Full-Detail/:id" element={<NoticeDetailFull />} />
-          <Route path="dashboard/add-student-report" element={<AddReport />} />
-          <Route path="dashboard/select-report" element={<ReportOption />} />
+          <Route path="dashboard/add-student-report/:id" element={<AddReport />} />
+          <Route path="dashboard/select-report/:id" element={<ReportOption />} />
         </Route>
 
         <Route path="/student" element={<StudentPrivate/>}>

@@ -120,3 +120,26 @@ export const deleteReportController=async(req,res)=>{
           
      }
 }
+
+//checkingAvilabilityController
+
+export const checkingAvilabilityController=async(req,res)=>{
+     try {
+          const data=await reportModel.find({studentId:req.params.sId}).select('-photo')
+          if(data.length>0){
+               return res.status(300).send({
+                    success:false,
+                    message:'already report is added',
+                    data
+               })
+          }else{
+               res.status(200).send({
+                    success:true,
+                    message:'you can add report '
+               })
+          }
+     } catch (error) {
+          console.log(error)
+          
+     }
+}
