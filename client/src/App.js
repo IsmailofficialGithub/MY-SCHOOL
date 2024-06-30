@@ -26,7 +26,8 @@ import NoticeDetailFull from "./pages/admin/notice/noticeDetailFull";
 import Report from './pages/report'
 import StudentPrivate from "./pages/components/studentPrivate";
 import AddReport from "./pages/admin/std-Report/add-report";
-import ReportOption from "./pages/admin/std-Report/report";
+import ReportOption from "./pages/admin/std-Report/reportMain";
+import UpdateReport from "./pages/admin/std-Report/update-Report";
 function App() {
   return (
     <>
@@ -47,6 +48,7 @@ function App() {
           <Route path="dashboard/notice-Full-Detail/:id" element={<NoticeDetailFull />} />
           <Route path="dashboard/add-student-report/:id" element={<AddReport />} />
           <Route path="dashboard/select-report/:id" element={<ReportOption />} />
+          <Route path="dashboard/update-report/:id" element={<UpdateReport />} />
         </Route>
 
         <Route path="/student" element={<StudentPrivate/>}>
