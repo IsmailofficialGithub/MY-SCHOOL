@@ -11,7 +11,7 @@ const ReportProvider = ({ children }) => {
  
   const reportdetail=async()=>{
     try {
-      const {data}=await axios.get('http://localhost:5000/api/v1/report/getAllReport')
+      const {data}=await axios.get('http://localhost:5000/api/v1/report/getAllReports')
       if(data?.success){
         setReportLength(data?.data)
       }

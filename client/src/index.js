@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { StudentProvider } from "./context/StudentContext";
+import { ReportProvider } from "./context/reportContext";
 // import 'antd/dist/antd.css';
 
 
@@ -13,7 +14,9 @@ root.render(
   <BrowserRouter>
     <React.StrictMode>
       <StudentProvider>
+        <ReportProvider>
         <App />
+        </ReportProvider>
       </StudentProvider>
     </React.StrictMode>
   </BrowserRouter>,

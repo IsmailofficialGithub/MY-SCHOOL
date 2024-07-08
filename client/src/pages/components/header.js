@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { ReportContext } from "../../context/reportContext";
+
+
 const Header = () => {
   const navigate = useNavigate();
   const [istoken, setIsToken] = useState(false);
@@ -8,7 +11,9 @@ const Header = () => {
   const [admin,setAdmin]=useState(false);
   const [isStudent,setIsStudent]=useState(false);
   const [userId,setUserId]=useState('');
-  const [reportLength,setReportLength]=useState('');
+  const reportLength=useContext(ReportContext);
+  // console.log(reportLength)
+  
 
   const handleLogout = () => {
     localStorage.removeItem("auth");
@@ -95,7 +100,7 @@ const Header = () => {
                   {isStudent ? (
                     <li className="nav-item">
                     <Link className="nav-link text-white" to={`/student/report/${userId}`}>
-                      Report({reportLength})
+                      Report({reportLength.length})
                     </Link>
                   </li>
                   ):''}
