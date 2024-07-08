@@ -28,6 +28,8 @@ import StudentPrivate from "./pages/components/studentPrivate";
 import AddReport from "./pages/admin/std-Report/add-report";
 import ReportOption from "./pages/admin/std-Report/reportMain";
 import UpdateReport from "./pages/admin/std-Report/update-Report";
+import StdFullReport from "./pages/admin/std-Report/std-FullReport";
+import NoticePageDetail from "./pages/noticePageDetail";
 function App() {
   return (
     <>
@@ -49,6 +51,7 @@ function App() {
           <Route path="dashboard/add-student-report/:id" element={<AddReport />} />
           <Route path="dashboard/select-report/:id" element={<ReportOption />} />
           <Route path="dashboard/update-report/:id" element={<UpdateReport />} />
+          <Route path="dashboard/FullReportDetail/:id" element={<StdFullReport />} />
         </Route>
 
         <Route path="/student" element={<StudentPrivate/>}>
@@ -59,6 +62,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         {/* <Route path="/report" element={<Report />} /> */}
         <Route path="/notice-board" element={<NoticeBoard />} />
+        <Route path="/notice-board-Detail/:id" element={<NoticePageDetail />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="/about" element={<AboutUs />} />

@@ -4,12 +4,11 @@ import AdminSide from "../../components/adminSide";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import toast from 'react-hot-toast'
-
 const ReportOption = () => {
   const navigate = useNavigate();
   const params = useParams();
   const [exist, setExist] = useState("");
-
+  // const context=ReportContext()
   const submitDelete=async(e)=>{
     e.preventDefault();
    let deleteValue=window.prompt('Type "Delete" to delete report')
@@ -50,7 +49,7 @@ const ReportOption = () => {
           <div className="col-md-8 select-report">
             {exist !== "ok" ? (
               <>
-                <button className="btn btn-secondary">Report Detail</button>
+                <button className="btn btn-secondary" onClick={()=>{navigate(`/admin/dashboard/FullReportDetail/${params.id}`)}}>Report Detail</button>
                 <button onClick={()=>{navigate(`/admin/dashboard/update-report/${params.id}`)}}>Report Update</button>
                 <button className="btn btn-danger" onClick={submitDelete}>Report Delete</button>
               </>

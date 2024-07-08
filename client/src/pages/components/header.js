@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import toast, { useToaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 const Header = () => {
   const navigate = useNavigate();
   const [istoken, setIsToken] = useState(false);
   const [role, setRole] = useState(false);
   const [admin,setAdmin]=useState(false);
   const [isStudent,setIsStudent]=useState(false);
-  const [userId,setUserId]=useState('')
+  const [userId,setUserId]=useState('');
+  const [reportLength,setReportLength]=useState('');
 
   const handleLogout = () => {
     localStorage.removeItem("auth");
@@ -94,7 +95,7 @@ const Header = () => {
                   {isStudent ? (
                     <li className="nav-item">
                     <Link className="nav-link text-white" to={`/student/report/${userId}`}>
-                      Report
+                      Report({reportLength})
                     </Link>
                   </li>
                   ):''}
