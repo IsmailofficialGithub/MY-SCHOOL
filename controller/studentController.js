@@ -1,11 +1,13 @@
 import slugify from "slugify";
 import studentModel from "../models/studentModel.js";
 import fs from "fs";
+import userModel from "../models/userModel.js";
+import { hashedPassword } from "../helper/hashedPassword.js";
 
 // add student
 export const addStudentController = async (req, res) => {
   try {
-    const { name, fatherName, address, rollNumber, grade, age, phone, fee } = req.fields;
+    const { name, fatherName, address, rollNumber, grade, age, phone, fee ,userId,password,answer} = req.fields;
     const { photo } = req.files;
     switch (true) {
       case !name:
@@ -24,9 +26,30 @@ export const addStudentController = async (req, res) => {
         return res.status(300).send({ error: "phone is required" });
       case !fee:
         return res.status(300).send({ error: "fee is required" });
+      case !userId:
+        return res.status(300).send({ error: "userId is required" });
+      case !password:
+        return res.status(300).send({ error: "password is required" });
       case photo && photo.size > 100000:
         return res.status(300).send({ error: "photo is required and Less than 1MB" });
     }
+
+    
+    const existingUser = await userModel.findOne({ userId });
+    if (existingUser) {
+      return res.status(200).send({
+        message: "userId is Not avilable",
+        success: false,
+        existingUser,
+      });
+
+    }else{
+      const hash = await hashedPassword(password);
+    const data = new userModel({ userId, password: hash, answer ,role:1});
+    await data.save();
+    }
+
+    
     const student = new studentModel({ ...req.fields, slug: slugify(name) });
     if (photo) {
       student.photo.data = fs.readFileSync(photo.path);
@@ -126,17 +149,23 @@ export const getStudentImages = async (req, res) => {
 
 export const deleteStudent = async (req, res) => {
   try {
-    const student = await studentModel.findByIdAndDelete(req.params.id).select("-photo");
-    student
-      ? res.status(200).send({
+    const student = await studentModel.findById(req.params.id).select("-photo");
+    const userId=student?.userId;
+    
+    if(student){
+      const deleteUser=await userModel.findOneAndDelete({userId:userId});
+      const deleteStudent=await studentModel.findByIdAndDelete(req.params.id).select('-photo')
+      res.status(200).send({
           success: true,
           message: "successfully deleted student",
           student,
         })
-      : res.status(404).send({
+      }else{
+        res.status(404).send({
           success: false,
           message: "no user Found",
         });
+      } 
   } catch (error) {
     console.log(error);
     res.status(500).send({

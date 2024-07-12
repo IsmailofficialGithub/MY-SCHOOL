@@ -49,6 +49,21 @@ const studentSchema=new mongoose.Schema({
           requried:true,
           trim:true
      },
+     userId:{
+          type:String,
+          requried:true,
+          trim:true
+     },
+     answer:{
+          type:String,
+          requried:true,
+          trim:true
+     },
+     password:{
+          type:String,
+          requried:true,
+          trim:true
+     },
      created_at: {
           type: Date,
           default: Date.now

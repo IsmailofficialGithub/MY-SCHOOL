@@ -9,10 +9,11 @@ import { GoSearch } from "react-icons/go";
 
 const StudentDetail = () => {
   const searchInput = {};
+  const navigate = useNavigate();
   const [filter, setFilter] = useState("");
   const [studentDetail, setStudentDetail] = useState([]);
-  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -28,6 +29,7 @@ const StudentDetail = () => {
       }
     } catch (error) {
       console.log(error);
+
     }
   };
 
@@ -43,6 +45,7 @@ const StudentDetail = () => {
       }
     } catch (error) {
       console.log(error);
+      window.location.reload()
     }
   };
   const filterApi = async (value) => {
@@ -132,7 +135,7 @@ const StudentDetail = () => {
                     <tr>
                       <th scope="row">{index + 1}</th>
                       <td>
-                        <img src={`http://localhost:5000/api/v1/student/get-student-photo/${e._id}`} alt={`Student ${e.name}`} width={"50px"} height={"50px"} style={{ objectFit: "fill" }} />
+                        <img src={`http://localhost:5000/api/v1/student/get-student-photo/${e._id}`} alt={`No Image `} width={"50px"} height={"50px"} style={{ objectFit: "fill" }}/>
                       </td>
                       <td>{e.name}</td>
                       <td>{e.fatherName}</td>

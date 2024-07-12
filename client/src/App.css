@@ -824,3 +824,27 @@ border-radius: 4px;
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+/* =============report */
+.after-heading-report-js{
+  background: red;
+  width: auto;
+  border-radius: 10px;
+  height: 500px;
+  padding: 29px;
+
+}
+
+.after-heading-report-js-1{
+  width: auto;
+  height: 100%;
+  border-radius: 5px;
+  border: 12px solid #354152;
+}
+
+/* ======btn */
+.small-btn{
+  background: red;
+  width: auto;
+  padding: 10px;
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -36,12 +36,7 @@ const StdFullReport = () => {
               <img src={`http://localhost:5000/api/v1/report/gettingPhoto/${params.id}`} className="figure-img img-fluid rounded" alt="No Photo is Add" style={{ height: "45vh", width: "45vh", objectFit: "cover" }} />
               <figcaption className="figure-caption text-end">{} Report detail</figcaption>
             </figure>
-            <button
-              onClick={() => {
-                navigate("/admin/dashboard/student-detail");
-              }}>
-              Back
-            </button>
+            <Link to={`http://localhost:3000/admin/dashboard/select-report/${params.id}`}><button>Back</button></Link>
           </div>
           <div className="col-md-6 mt-5">
             <h3>My School</h3>

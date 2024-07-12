@@ -1,10 +1,12 @@
 import teacherModel from "../models/teacherModel.js";
 import slugify from "slugify";
 import fs from "fs";
+import userModel from "../models/userModel.js";
+import { hashedPassword } from "../helper/hashedPassword.js";
 
 export const addTeacherController = async (req, res) => {
   try {
-    const { name, gender, address, experience, bankDetail, subject, salary, phone } = req.fields;
+    const { name, gender, address, experience, bankDetail, subject, userId, password, answer, salary, phone,qualifications } = req.fields;
     const { idCard, photo } = req.files;
     switch (true) {
       case !name:
@@ -23,11 +25,32 @@ export const addTeacherController = async (req, res) => {
         return res.status(300).send({ error: "phone is required" });
       case !salary:
         return res.status(300).send({ error: "salary is required" });
+      case !userId:
+        return res.status(300).send({ error: "userId is required" });
+      case !password:
+        return res.status(300).send({ error: "password is required" });
       case idCard && idCard.size > 1000000:
         return res.status(300).send({ error: "idCard is required and Less than 1MB" });
       case photo && photo.size > 1000000:
         return res.status(300).send({ error: "photo is required and Less than 1MB" });
     }
+
+    
+    const existingUser = await userModel.findOne({ userId });
+    if (existingUser) {
+      return res.status(200).send({
+        message: "userId is Not avilable",
+        success: false,
+        existingUser,
+      });
+
+    }else{
+      const hash = await hashedPassword(password);
+    const data = new userModel({ userId, password: hash, answer ,role:2});
+    await data.save();
+    }
+
+
     const student = new teacherModel({ ...req.fields, slug: slugify(name) });
     if (idCard) {
       student.idCard.data = fs.readFileSync(idCard.path);
@@ -37,6 +60,8 @@ export const addTeacherController = async (req, res) => {
       student.photo.data = fs.readFileSync(photo.path);
       student.photo.contentType = photo.type;
     }
+
+    
     await student.save();
     res.status(200).send({
       success: true,
@@ -71,10 +96,9 @@ export const allTeacherController = async (req, res) => {
 export const teacherPhotoController = async (req, res) => {
   try {
     const student = await teacherModel.findById(req.params.id).select("photo");
-    if(student?.photo.data){
-      res.set('Content-type',student.photo.contentType);
+    if (student?.photo.data) {
+      res.set("Content-type", student.photo.contentType);
       return res.status(200).send(student.photo.data);
-    
     } else {
       res.status(404).send({
         success: false,
@@ -93,10 +117,9 @@ export const teacherPhotoController = async (req, res) => {
 export const teacherIdCardController = async (req, res) => {
   try {
     const student = await teacherModel.findById(req.params.id).select("idCard");
-    if(student?.idCard?.data){
-      res.set('Content-type',student.idCard.contentType);
+    if (student?.idCard?.data) {
+      res.set("Content-type", student.idCard.contentType);
       return res.status(200).send(student.idCard.data);
-    
     } else {
       res.status(404).send({
         success: false,
@@ -112,57 +135,56 @@ export const teacherIdCardController = async (req, res) => {
   }
 };
 
-
 //singleTeacherController
-export const singleTeacherController=async(req,res)=>{
+export const singleTeacherController = async (req, res) => {
   try {
-    const data=await teacherModel.findById(req.params.id).select('-photo -idCard')
-    if(data){
+    const data = await teacherModel.findById(req.params.id).select("-photo -idCard");
+    if (data) {
       res.status(200).send({
-        success:true,
-        message:'successFully getting Teacher Detail',
-        data
-      })
-    }else{
+        success: true,
+        message: "successFully getting Teacher Detail",
+        data,
+      });
+    } else {
       res.status(404).send({
-        success:false,
-        message:'No teacher Found',
-      })
+        success: false,
+        message: "No teacher Found",
+      });
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).send({
-      success:false,
-      message:'error in getting single teacher detail',
-      error
-    })
-    
+      success: false,
+      message: "error in getting single teacher detail",
+      error,
+    });
   }
-}
-
-
+};
 
 //deleteTeacherController
-export const deleteTeacherController=async(req,res)=>{
+export const deleteTeacherController = async (req, res) => {
   try {
-    const data=await teacherModel.findByIdAndDelete(req.params.id)
+    const data = await teacherModel.findById(req.params.id);
+    let teacherId=data?.userId;
+    if(data){
+      await userModel.deleteOne({userId:teacherId})
+      await teacherModel.findByIdAndDelete(req.params.id)
+    }
     res.status(200).send({
-      success:true,
-      message:'successFully deleted data',
-      data
-    })
+      success: true,
+      message: "successFully deleted data",
+      data,
+    });
   } catch (error) {
-    console.log(error)
-    
+    console.log(error);
   }
-}
+};
 
-
-// update teacher detail 
+// update teacher detail
 export const updateTeacherController = async (req, res) => {
   try {
     const { id } = req.params;
-    const {name, gender, address, experience, bankDetail, subject, salary, phone } = req.fields;
+    const { name, gender, address, experience, bankDetail, subject, salary, phone } = req.fields;
     const { idCard, photo } = req.files;
 
     // Find the student by ID
@@ -199,11 +221,11 @@ export const updateTeacherController = async (req, res) => {
     }
 
     // Save the updated teacher
-    await teacher.save()
+    await teacher.save();
     res.status(200).send({
       success: true,
-      message: 'teacher updated successfully',
-      teacher
+      message: "teacher updated successfully",
+      teacher,
     });
   } catch (error) {
     console.log(error);

@@ -41,6 +41,22 @@ const teacherSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
+  userId: {
+    type: String,
+    requried: true,
+    trim: true,
+  },
+  answer: {
+    type: String,
+    requried: true,
+    trim: true,
+  },
+  password: {
+    type: String,
+    requried: true,
+    trim: true,
+  },
   bankDetail: {
     type: String,
     trim: true,
@@ -59,4 +75,4 @@ const teacherSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model('Teacher', teacherSchema);
+export default mongoose.model("Teacher", teacherSchema);
