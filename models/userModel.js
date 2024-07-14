@@ -18,6 +18,10 @@ const userSchema= new mongoose.Schema({
           type: Date,
           default: Date.now
       },
+      studentUserId:{
+          type:mongoose.ObjectId,
+          ref:"students",
+     },
      role:{
           type:Number,
           default:0,

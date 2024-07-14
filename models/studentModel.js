@@ -54,6 +54,7 @@ const studentSchema=new mongoose.Schema({
           requried:true,
           trim:true
      },
+   
      answer:{
           type:String,
           requried:true,

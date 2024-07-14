@@ -8,6 +8,7 @@ const Report = () => {
   const params=useParams();
   const [imgSrc,setImgSrc]=useState(`http://localhost:5000/api/v1/report/gettingPhoto/${params.id}`)
   const [reportData,setReportData]=useState([]);
+  const apiId=JSON.parse(localStorage.getItem('auth')).user?.studentUserId;
   const altSrc=`/images/logo__2_-removebg-preview.png`
 
   const onImgError=()=>{
@@ -16,7 +17,7 @@ const Report = () => {
 
   const gettingData=async()=>{
     try {
-      const {data}=await axios.get(`http://localhost:5000/api/v1/report/getReport/${params.id}`)
+      const {data}=await axios.get(`http://localhost:5000/api/v1/report/getReport/${apiId}`)
       if(data?.success){
         setReportData(data?.data)
       }

@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import slugify from "slugify";
 import studentModel from "../models/studentModel.js";
 import fs from "fs";
@@ -7,8 +8,10 @@ import { hashedPassword } from "../helper/hashedPassword.js";
 // add student
 export const addStudentController = async (req, res) => {
   try {
-    const { name, fatherName, address, rollNumber, grade, age, phone, fee ,userId,password,answer} = req.fields;
+    const { name, fatherName, address, rollNumber, grade, age, phone, fee, userId, password, answer } = req.fields;
     const { photo } = req.files;
+
+    // Validate required fields
     switch (true) {
       case !name:
         return res.status(300).send({ error: "Name is required" });
@@ -34,40 +37,47 @@ export const addStudentController = async (req, res) => {
         return res.status(300).send({ error: "photo is required and Less than 1MB" });
     }
 
-    
+    // Check if user already exists
     const existingUser = await userModel.findOne({ userId });
     if (existingUser) {
       return res.status(200).send({
-        message: "userId is Not avilable",
+        message: "userId is Not available",
         success: false,
         existingUser,
       });
+    }
 
-    }else{
+    // Create student entry
+    let student;
+    try {
+      student = new studentModel({ ...req.fields, slug: slugify(name) });
+      if (photo) {
+        student.photo.data = fs.readFileSync(photo.path);
+        student.photo.contentType = photo.type;
+      }
+      await student.save();
+    } catch (error) {
+      return res.status(500).send({ error: "Failed to add student", details: error.message });
+    }
+
+    // Hash password and create user entry with reference to student
+    try {
       const hash = await hashedPassword(password);
-    const data = new userModel({ userId, password: hash, answer ,role:1});
-    await data.save();
+      const user = new userModel({ userId, password: hash, answer, role: 1, studentUserId: student._id });
+      await user.save();
+    } catch (error) {
+      // Rollback student creation if user creation fails
+      await studentModel.findByIdAndDelete(student._id);
+      return res.status(500).send({ error: "Failed to add user", details: error.message });
     }
 
-    
-    const student = new studentModel({ ...req.fields, slug: slugify(name) });
-    if (photo) {
-      student.photo.data = fs.readFileSync(photo.path);
-      student.photo.contentType = photo.type;
-    }
-    await student.save();
     res.status(200).send({
       success: true,
       message: "Student added successfully",
       student,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).send({
-      message: "error in adding student",
-      success: false,
-      error,
-    });
+    res.status(500).send({ error: "Internal Server Error", details: error.message });
   }
 };
 
@@ -150,22 +160,22 @@ export const getStudentImages = async (req, res) => {
 export const deleteStudent = async (req, res) => {
   try {
     const student = await studentModel.findById(req.params.id).select("-photo");
-    const userId=student?.userId;
-    
-    if(student){
-      const deleteUser=await userModel.findOneAndDelete({userId:userId});
-      const deleteStudent=await studentModel.findByIdAndDelete(req.params.id).select('-photo')
+    const userId = student?.userId;
+
+    if (student) {
+      const deleteUser = await userModel.findOneAndDelete({ userId: userId });
+      const deleteStudent = await studentModel.findByIdAndDelete(req.params.id).select("-photo");
       res.status(200).send({
-          success: true,
-          message: "successfully deleted student",
-          student,
-        })
-      }else{
-        res.status(404).send({
-          success: false,
-          message: "no user Found",
-        });
-      } 
+        success: true,
+        message: "successfully deleted student",
+        student,
+      });
+    } else {
+      res.status(404).send({
+        success: false,
+        message: "no user Found",
+      });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -320,7 +330,7 @@ export const classFilterController = async (req, res) => {
 
 export const searchStudentController = async (req, res) => {
   try {
-    const { address,name, fatherName,  grade } = req.body;
+    const { address, name, fatherName, grade } = req.body;
 
     // Build query object dynamically
     const query = {};
@@ -339,10 +349,9 @@ export const searchStudentController = async (req, res) => {
     console.log(query);
     // Ensure at least one field is provided for the search
     if (Object.keys(query).length === 0) {
-      return res.status(200).send({ 
-        success:true,
+      return res.status(200).send({
+        success: true,
         message: "At least one search criterion (address, fatherName, class) is required",
-        
       });
     }
 
@@ -350,9 +359,9 @@ export const searchStudentController = async (req, res) => {
 
     if (data.length === 0) {
       return res.status(200).send({
-        success:false,
-        message:' No students found ',
-        data
+        success: false,
+        message: " No students found ",
+        data,
       });
     }
 
@@ -362,11 +371,10 @@ export const searchStudentController = async (req, res) => {
       data,
     });
   } catch (error) {
-   
     res.status(500).send({
-      success:false,
-      message: "An error occurred while searching for students" ,
-      error
+      success: false,
+      message: "An error occurred while searching for students",
+      error,
     });
   }
 };

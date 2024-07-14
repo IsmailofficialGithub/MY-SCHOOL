@@ -57,7 +57,7 @@ export const getSingleReportController = async (req, res) => {
         data,
       });
     } else {
-      res.status(400).send({
+      res.status(206).send({
         success: true,
         message: "No report add For U",
       });
