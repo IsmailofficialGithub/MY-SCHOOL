@@ -827,11 +827,14 @@ border-radius: 4px;
 
 /* =============report */
 .after-heading-report-js{
-  background: red;
+  background: #535E7F;
   width: auto;
   border-radius: 10px;
-  height: 500px;
+  height: auto;
   padding: 29px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  border-bottom: 1px solid black
 
 }
 
@@ -839,8 +842,12 @@ border-radius: 4px;
   width: auto;
   height: 100%;
   border-radius: 5px;
-  border: 12px solid #354152;
-}
+  border: 4px solid #354152;
+  margin: 20px;
+
+  
+};
+
 
 /* ======btn */
 .small-btn{

@@ -53,7 +53,7 @@ export const getSingleReportController = async (req, res) => {
     if (data) {
       res.status(200).send({
         success: true,
-        message: "successFully getting report",
+        message: "SuccessFully getting report",
         data,
       });
     } else {
