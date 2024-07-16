@@ -1,19 +1,18 @@
-import React, { useEffect, useState ,useContext} from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { ReportContext } from "../../context/reportContext";
-
+import { ClockCircleOutlined } from "@ant-design/icons";
+import { Badge } from "antd";
 
 const Header = () => {
   const navigate = useNavigate();
   const [istoken, setIsToken] = useState(false);
   const [role, setRole] = useState(false);
-  const [admin,setAdmin]=useState(false);
-  const [isStudent,setIsStudent]=useState(false);
-  const [userId,setUserId]=useState('');
-  const reportLength=useContext(ReportContext);
-  // console.log(reportLength)
-  
+  const [admin, setAdmin] = useState(false);
+  const [isStudent, setIsStudent] = useState(false);
+  const [userId, setUserId] = useState("");
+  const reportAvaliable = useContext(ReportContext);
 
   const handleLogout = () => {
     localStorage.removeItem("auth");
@@ -22,16 +21,15 @@ const Header = () => {
       toast.success("Logout Successfully");
     }, 100);
   };
-  useEffect(()=>{
+  useEffect(() => {
     const admin = JSON.parse(localStorage.getItem("auth"));
-    setUserId(admin?.user?._id)
+    setUserId(admin?.user?._id);
     if (admin?.user?.role === 3) {
-      setAdmin(true)
+      setAdmin(true);
     } else {
       setAdmin(false);
     }
   }, []);
- 
 
   useEffect(() => {
     const token = localStorage.getItem("auth");
@@ -49,15 +47,14 @@ const Header = () => {
       setRole(true);
     }
   }, []);
-  useEffect(()=>{
+  useEffect(() => {
     const student = JSON.parse(localStorage.getItem("auth"));
-    if(student?.user?.role === 1){
+    if (student?.user?.role === 1) {
       setIsStudent(true);
-    }else{
-      setIsStudent(false)
+    } else {
+      setIsStudent(false);
     }
-
-  },[])
+  }, []);
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-black d-flex text-white  ">
@@ -98,15 +95,35 @@ const Header = () => {
                     </Link>
                   </li>
                   {isStudent ? (
-                    <li className="nav-item">
-                    <Link className="nav-link text-white" to={`/student/report/${userId}`}>
-                      Report({reportLength.length})
-                    </Link>
-                  </li>
-                  ):''}
+                    <>
+                      {reportAvaliable === "report is available for this user" ? (
+                        <Badge
+                          count={
+                            <ClockCircleOutlined
+                              style={{
+                                color: "#f5222d",
+                                marginTop: "5px",
+                              }}
+                            />
+                          }>
+                          <li className="nav-item">
+                            <Link className="nav-link text-white" to={`/student/report/${userId}`}>
+                              <p style={{ fontSize: "19px" }}>Report</p>
+                            </Link>
+                          </li>
+                        </Badge>
+                      ) : (
+                        <Link className="nav-link text-white" to={`/student/report/${userId}`}>
+                          <p>Report</p>
+                        </Link>
+                      )}
+                    </>
+                  ) : (
+                    ""
+                  )}
                   {role ? (
-                    <li className="nav-item" >
-                      <Link className="nav-link text-white" to={`/${admin ? 'admin' :'teacher'}/dashboard`}>
+                    <li className="nav-item">
+                      <Link className="nav-link text-white" to={`/${admin ? "admin" : "teacher"}/dashboard`}>
                         Dashboard
                       </Link>
                     </li>
@@ -118,7 +135,6 @@ const Header = () => {
                       LogOut
                     </Link>
                   </li>
-                  
                 </>
               )}
 

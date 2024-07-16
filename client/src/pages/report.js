@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Layout from "./components/Layout";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { ReportContext } from "../context/reportContext";
 
 const Report = () => {
   const params = useParams();
   const [imgSrc, setImgSrc] = useState(`http://localhost:5000/api/v1/report/gettingPhoto/${params.id}`);
   const [reportData, setReportData] = useState([]);
   const [isReport, setIsReport] = useState(false);
+  const reportAvaliable=useContext(ReportContext)
   const apiId = JSON.parse(localStorage.getItem("auth")).user?.studentUserId;
   const altSrc = `/images/school.jpeg`;
 
@@ -37,7 +39,7 @@ const Report = () => {
       <div className="container-sm mt-3">
         <div className="row">
           <div className="col-md-4">
-            <figure className="figure">
+            <figure className="figure mt-5">
               <img src={imgSrc} className="figure-img img-fluid rounded" alt="No Photo is Add" style={{ height: "60vh", width: "60vh", objectFit: "cover" }} onError={onImgError} />
               <figcaption className="figure-caption text-end">{} Report detail</figcaption>
             </figure>

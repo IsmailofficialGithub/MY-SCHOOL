@@ -191,3 +191,32 @@ export const gettingPhotoController=async(req,res)=>{
     
   }
 }
+
+
+// is Report Avaliable
+
+export const IsReportAvaliableController=async(req,res)=>{
+  try {
+    const userId=req.body;
+    const isReport=await reportModel.find({studentId:userId.studentId})
+    if(isReport.length===0){
+      res.status(200).send({
+        success:true,
+        message:'report is available for this user',
+      })
+    }else{
+      res.status(200).send({
+        success:false,
+        message:'no report is added for u'
+      })
+    }
+    
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success:false,
+      message:'SomeThing wents wronge in trycatch block',
+      error:error.message
+    })
+  }
+}

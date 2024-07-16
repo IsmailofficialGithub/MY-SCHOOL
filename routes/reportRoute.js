@@ -1,6 +1,6 @@
 import express from 'express'
 import formidable from 'express-formidable'
-import { addReportController, checkingAvilabilityController, deleteReportController, getAllReportsController, getSingleReportController, gettingPhotoController, updateReportController } from '../controller/reportController.js'
+import { addReportController, checkingAvilabilityController, deleteReportController, getAllReportsController, getSingleReportController, gettingPhotoController, IsReportAvaliableController, updateReportController } from '../controller/reportController.js'
 
 const router=express.Router()
 
@@ -18,4 +18,6 @@ router.put('/updateReport/:sId',formidable(),updateReportController)
 router.get('/checkingAvalible/:sId',checkingAvilabilityController)
 // getting photo
 router.get('/gettingPhoto/:sId',gettingPhotoController)
+//is report avaliable
+router.put('/isReportAvaliable',IsReportAvaliableController)
 export default router;

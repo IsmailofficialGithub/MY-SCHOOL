@@ -32,20 +32,22 @@ useEffect(()=>{
       <div className='col-md-4'></div>
       <div className='col-md-8 mb-5'>
         <div className='noticeCard'>
+      
+
 
        {notice?.map((e)=>(
-           <div className="card" style={{width: '15rem'}}>
-           <img src ={`http://localhost:5000/api/v1/notice/get-photo/${e._id}`} className="card-img-top" alt="..." />
+           <div className="card" style={{width: '15rem'}} key={e._id}>
+           <img src ={`http://localhost:5000/api/v1/notice/get-photo/${e._id}`} className="card-img-top" alt="..."/>
            <div className="card-body"  style={{textTransform:'capitalize'}}>
              <h5 className="card-title">{e.title}</h5>
              <p className="card-text">{e.description.split(" ").slice(0, 13).join(" ")}...</p>
              <Link to={`/notice-board-Detail/${e._id}`} className="btn btn-primary mb-2">More Detail</Link>
-             <p>{e.created_at.split('').slice(0,10).join('')}</p>
+             <p>{e.created_at.split('T')[0]}</p>
            </div>
          </div>
+       
          
        ))}
-     
 
         </div>
       </div>
