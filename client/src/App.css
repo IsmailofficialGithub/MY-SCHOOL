@@ -737,7 +737,7 @@ body {
 }
 /* ////admin dashboard */
 .admin-right{
-  background: rgba(255, 255, 255, 0.15);
+  background:#001f26;
   /* height:100vh ; */
 }
 .main-admin{
@@ -748,15 +748,23 @@ body {
   flex-wrap: wrap;
   flex-direction: row;
   margin: 50px 0px;
+  border-left: 2px solid greenyellow;
 }
 .admin-box{
   cursor: pointer;
 border-radius: 20px;
 padding: 10px;
 color: black;
-width: 200px;
-height: 200px;
+width: 150px;
+height: 150px;
+text-decoration: none !important;
 }
+.justifyContentSpaceBetween{
+  justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 3px solid red;
+}
+
 
 
 /* =========filter-student-detail */

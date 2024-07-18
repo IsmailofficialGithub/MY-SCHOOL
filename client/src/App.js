@@ -30,6 +30,7 @@ import ReportOption from "./pages/admin/std-Report/reportMain";
 import UpdateReport from "./pages/admin/std-Report/update-Report";
 import StdFullReport from "./pages/admin/std-Report/std-FullReport";
 import NoticePageDetail from "./pages/noticePageDetail";
+import UserPage from "./pages/admin/user";
 function App() {
   return (
     <>
@@ -52,13 +53,13 @@ function App() {
           <Route path="dashboard/select-report/:id" element={<ReportOption />} />
           <Route path="dashboard/update-report/:id" element={<UpdateReport />} />
           <Route path="dashboard/FullReportDetail/:id" element={<StdFullReport />} />
+          <Route path="dashboard/UserInfo" element={<UserPage />} />
         </Route>
 
         <Route path="/student" element={<StudentPrivate/>}>
           <Route path="report/:id" element={<Report/>}/>
         </Route>
 
-        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         {/* <Route path="/report" element={<Report />} /> */}
         <Route path="/notice-board" element={<NoticeBoard />} />
@@ -69,6 +70,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/qna" element={<Qna />} />
         <Route path="/test" element={<Test />} />
+        <Route path="/" element={<HomePage />} />
       </Routes>
     </>
   );

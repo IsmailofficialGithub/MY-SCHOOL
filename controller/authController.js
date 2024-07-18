@@ -1,5 +1,6 @@
-import userModel from "../models/userModel.js";
 import { hashedPassword, comparePassword } from "../helper/hashedPassword.js";
+import userModel from "../models/userModel.js";
+
 import jwt from 'jsonwebtoken';
 // register user
 export const registerController = async (req, res) => {
