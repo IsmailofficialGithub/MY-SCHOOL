@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
-import AdminSide from "../../components/adminSide";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const UpdateReport = () => {
+const UpdateReportForTeacher = () => {
   const params = useParams();
   const [message, setMessage] = useState("");
   const [condition, setCondition] = useState("");
   const [complain, setComplain] = useState("");
   const [notification, setNotification] = useState("");
   const [photo, setPhoto] = useState("");
+  const navigate=useNavigate()
 
   const getValue = async () => {
     try {
@@ -42,6 +42,7 @@ const UpdateReport = () => {
       const {data}=await axios.put(`http://localhost:5000/api/v1/report/updateReport/${params.id}`,updateData)
       if(data?.success){
         toast.success('Updated report SuccessFully');
+        navigate(`/teacher/dashboard/report/${params.id}`)
       }
       
       
@@ -63,11 +64,9 @@ const UpdateReport = () => {
       <>
         <div className="container">
           <div className="row">
-            <div className="col-4">
-              <AdminSide />
-            </div>
+           
 
-            <div className="col-8">
+            <div className="col-12">
               <div className="container mt-3 w-75">
                 <h4 className="text-center mb-3">Enter Detail To Update a Report</h4>
                 <form>
@@ -167,4 +166,4 @@ const UpdateReport = () => {
   );
 };
 
-export default UpdateReport;
+export default UpdateReportForTeacher;

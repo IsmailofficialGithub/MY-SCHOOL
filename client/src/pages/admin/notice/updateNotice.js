@@ -25,7 +25,6 @@ const UpdateNotice = () => {
                setPhoto(data?.data.photo)
               
           } catch (error) {
-            window.location.reload()
                console.log(error)
 
                
@@ -54,7 +53,6 @@ const UpdateNotice = () => {
         
       } catch (error) {
         console.log(error)
-        window.location.reload()
 
         
       }

@@ -31,6 +31,13 @@ import UpdateReport from "./pages/admin/std-Report/update-Report";
 import StdFullReport from "./pages/admin/std-Report/std-FullReport";
 import NoticePageDetail from "./pages/noticePageDetail";
 import UserPage from "./pages/admin/user";
+import StudentDetailforTeacher from "./pages/teacher/student/studentDetailForTeacher";
+import TeacherPrivate from "./pages/teacher/teacherPrivate";
+import StudentDetailForTeachers from "./pages/teacher/student/StudentFullDetailForTechers";
+import StudentReportForTeacher from "./pages/teacher/student/studentReportForTeacher";
+import AddReportForTeacher from "./pages/teacher/report/AddReportForTeacher";
+import ReportFullDetailForTeacher from "./pages/teacher/report/ReportFullDetailForTeacher";
+import UpdateReportForTeacher from "./pages/teacher/report/updateReportForTeacher";
 function App() {
   return (
     <>
@@ -58,6 +65,14 @@ function App() {
 
         <Route path="/student" element={<StudentPrivate/>}>
           <Route path="report/:id" element={<Report/>}/>
+        </Route>
+        <Route path="/teacher" element={<TeacherPrivate/>}>
+          <Route path="dashboard" element={<StudentDetailforTeacher/>}/>
+          <Route path="dashboard/report/:id" element={<StudentReportForTeacher/>}/>
+          <Route path="dashboard/detail/:id" element={<StudentDetailForTeachers/>}/>
+          <Route path="dashboard/add-student-report/:id" element={<AddReportForTeacher/>}/>
+          <Route path="dashboard/FullReportDetail/:id" element={<ReportFullDetailForTeacher/>}/>
+          <Route path="dashboard/update-report/:id" element={<UpdateReportForTeacher/>}/>
         </Route>
 
         <Route path="/login" element={<Login />} />

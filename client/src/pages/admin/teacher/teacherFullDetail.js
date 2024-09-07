@@ -19,7 +19,6 @@ const TeacherFullDetail = () => {
     } catch (error) {
       if (error) {
         toast.error("error");
-        window.location.reload();
       }
     }
   };

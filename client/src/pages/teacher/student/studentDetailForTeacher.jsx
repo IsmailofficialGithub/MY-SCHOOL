@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Empty, Modal } from "antd";
 import { GoSearch } from "react-icons/go";
 
-const StudentDetail = () => {
+const StudentFullDetailforTeacher = () => {
   const searchInput = {};
   const navigate = useNavigate();
   const [filter, setFilter] = useState("");
@@ -89,12 +89,12 @@ const StudentDetail = () => {
       <>
         <div className="container">
           <div className="row">
-            <div className="col-4 ">
+            {/* <div className="col-4 ">
               <AdminSide />
-            </div>
+            </div> */}
 
 
-            <div className="col-8 mt-4 mb-3">
+            <div className="col-12 mt-4 mb-3">
               <h6 className="text-center mb-3">Total Student : {studentDetail.length}</h6>
               {/* //filter  */}
 
@@ -146,26 +146,12 @@ const StudentDetail = () => {
                         <div
                           className="btn btn-secondary m-1"
                           onClick={() => {
-                            navigate(`/admin/dashboard/fullStudent-detail/${e._id}`);
+                            navigate(`/teacher/dashboard/detail/${e._id}`);
                           }}>
                           Details
                         </div>
-                        <div
-                          className="btn btn-primary"
-                          onClick={() => {
-                            navigate(`/admin/dashboard/update-detail/${e._id}`);
-                          }}>
-                          Update
-                        </div>
-                        <div
-                          className="btn btn-danger m-1"
-                          onClick={() => {
-                            sumbitDelete(e._id);
-                          }}>
-                          Delete
-                        </div>
                         <div style={{textDecoration:"underLine",color:'blue',cursor:'pointer'}} >
-                        < span onClick={()=>{navigate(`/admin/dashboard/select-report/${e._id}`)}}>  Report ↗️</span>
+                        < span onClick={()=>{navigate(`/teacher/dashboard/report/${e._id}`)}}>  Report ↗️</span>
                         </div>
                       </td>
                     </tr>
@@ -236,4 +222,4 @@ const StudentDetail = () => {
   );
 };
 
-export default StudentDetail;
+export default StudentFullDetailforTeacher;

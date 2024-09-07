@@ -7,8 +7,8 @@ const PrivateRoute = () => {
      const [admin,setAdmin]=useState(false);
 
      useEffect(() => {
-          const student = JSON.parse(localStorage.getItem("auth"));
-          if (student?.user?.role === 0 || student?.user?.role === 1) {
+          const user = JSON.parse(localStorage.getItem("auth"));
+          if (user?.user?.role === 0 || user?.user?.role === 1 ||user?.user.role ===2) {
             setAdmin(false);
             navigate('/');
            setTimeout(()=>{

@@ -15,7 +15,6 @@ const NoticeDetailFull = () => {
       }
     } catch (error) {
       console.log(error);
-      window.location.reload();
     }
   };
   useEffect(() => {

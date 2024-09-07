@@ -810,6 +810,8 @@ text-decoration: none !important;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   gap: 13px;
 }
 
@@ -824,7 +826,9 @@ border-radius: 4px;
   margin-bottom: 11px;
   cursor: pointer;
 }
-
+.img-div{
+  background: url('/public/images/logo1.png');
+}
 .select-report{
   display: flex;
   align-items: center;
@@ -862,4 +866,75 @@ border-radius: 4px;
   background: red;
   width: auto;
   padding: 10px;
+}
+
+/* //=============home */
+
+.home-admission-box{
+  background: orange;
+  width: 300px;
+  height: 300px;
+   display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
+  gap: 25px;
+  padding:10px;
+  text-align: center;
+  text-transform: capitalize;
+}
+.admission-main{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.bold{
+  font-size: 35px !important;
+  font-weight: 900 !important;
+  color: #001216;
+}
+.events-home{
+  background: #0066b3;
+  width: 100%;
+  height: 620px;
+  padding: 20px 0px;
+  position: relative;
+  display: -webkit-box;
+  align-items: center;
+  overflow: scroll;
+  scroll-behavior:auto;
+  gap: 3px;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+.event-home-inner{
+  background: #000;
+  width: 350px;
+  height: 350px;
+  margin-left: 20px;
+}
+.event-home-inner img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+}
+.event-home-inner h3{
+  color: #ffcb05; 
+}
+.event-home-inner p{
+font-size: 20px;
+margin-bottom: 40px;
+height: 66px;
+}
+
+.event-home-inner span{
+  background: #000;
+  font-weight: 200;
+  padding: 20px 40px;
+  border-radius: 5px;
+  cursor: pointer;
 }
