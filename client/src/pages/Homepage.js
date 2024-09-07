@@ -32,7 +32,7 @@ useEffect(()=>{
           </div>
           <div className="carousel-inner">
             <div className="carousel-item active">
-              <img src="/images/schoolok.jpg" className="d-block w-100" alt="college" />
+              <img src="/images/1.jpg"  alt="college" style={{height:'70vh',width:'100%',objectFit:'cover'}}/>
               <div className="carousel-caption d-none d-md-block " style={{ color: "red" }}>
                 <h1>MY SCHOOL</h1>
                 <h3 className="bold">Some representative placeholder content for the first slide.</h3>
@@ -43,14 +43,14 @@ useEffect(()=>{
               </div>
             </div>
             <div className="carousel-item">
-              <img src="/images/schoolok.jpg" className="d-block w-100" alt="..." />
+              <img src="/images/schoolok.jpg" className="d-block w-100" alt="..." style={{height:'70vh',width:'100%',objectFit:'cover'}}/>
               <div className="carousel-caption d-none d-md-block">
                 <h3>Second slide label</h3>
                 <h5>Some representative placeholder content for the second slide.</h5>
               </div>
             </div>
             <div className="carousel-item">
-              <img src="/images/collage3.jpeg" className="d-block w-100" alt="..." />
+              <img src="/images/collage3.jpeg" className="d-block w-100" alt="..." style={{height:'70vh',width:'100%',objectFit:'cover'}}/>
               <div className="carousel-caption d-none d-md-block">
                 <h5>Third slide label</h5>
                 <p>Some representative placeholder content for the third slide.</p>
