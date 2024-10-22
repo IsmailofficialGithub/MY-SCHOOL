@@ -25,7 +25,7 @@ const AddReportForTeacher = () => {
       sumbitData.append("notification", notification);
       sumbitData.append("photo", photo);
 
-      const { data } = await axios.post("http://localhost:5000/api/v1/report/addReport", sumbitData);
+      const { data } = await axios.post("https://my-school-backend.onrender.com/api/v1/report/addReport", sumbitData);
       if (data?.success) {
         navigate(`/teacher/dashboard/report/${id}`);
         setTimeout(() => {

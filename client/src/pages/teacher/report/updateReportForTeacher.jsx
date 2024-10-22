@@ -15,7 +15,7 @@ const UpdateReportForTeacher = () => {
 
   const getValue = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/v1/report/getReport/${params.id}`);
+      const { data } = await axios.get(`https://my-school-backend.onrender.com/api/v1/report/getReport/${params.id}`);
       if (data?.success) {
         setMessage(data?.data.message);
         setCondition(data?.data?.condition);
@@ -39,7 +39,7 @@ const UpdateReportForTeacher = () => {
       updateData.append('complain',complain)
       updateData.append('notification',notification)
 
-      const {data}=await axios.put(`http://localhost:5000/api/v1/report/updateReport/${params.id}`,updateData)
+      const {data}=await axios.put(`https://my-school-backend.onrender.com/api/v1/report/updateReport/${params.id}`,updateData)
       if(data?.success){
         toast.success('Updated report SuccessFully');
         navigate(`/teacher/dashboard/report/${params.id}`)
@@ -136,7 +136,7 @@ const UpdateReportForTeacher = () => {
                         </div>
                       ) : (
                         <div className="text-center">
-                          <img src={`http://localhost:5000/api/v1/report/gettingPhoto/${params.id}`} alt="NO PHOTO IS ADDED WHILE CREATING" className="img img-responsive" height={"200px"} />
+                          <img src={`https://my-school-backend.onrender.com/api/v1/report/gettingPhoto/${params.id}`} alt="NO PHOTO IS ADDED WHILE CREATING" className="img img-responsive" height={"200px"} />
                         </div>
                       )}
                     </div>

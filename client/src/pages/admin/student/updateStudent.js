@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import AdminSide from "../../components/adminSide";
-import { useParams ,useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -16,9 +16,9 @@ const UpdateStudent = () => {
   const [phone, setPhone] = useState("");
   const [fee, setFee] = useState("");
   const [photo, setphoto] = useState("");
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const getData = async () => {
-    const { data } = await axios.get(`http://localhost:5000/api/v1/student/get-single-student/${params.id}`);
+    const { data } = await axios.get(`https://my-school-backend.onrender.com/api/v1/student/get-single-student/${params.id}`);
     if (data) {
       let student = data?.user;
       setName(student.name);
@@ -33,37 +33,37 @@ const UpdateStudent = () => {
     }
   };
 
-  const submitBtn=async(e)=>{
-   e.preventDefault();
-        try {
-          const studentData = new FormData()
-          studentData.append("name", name);
-          studentData.append("fatherName", fatherName);
-          studentData.append("rollNumber", rollNumber);
-          studentData.append("age", age);
-          studentData.append("grade", grade);
-          studentData.append("address", address);
-          studentData.append("fee", fee);
-          studentData.append("photo", photo);
-          studentData.append("phone", phone);
-          
-          
-          const { data } = await axios.post(`http://localhost:5000/api/v1/student/updateStudent/${params.id}`, studentData)
-          if (data?.success) {
-            navigate('/admin/dashboard/Student-detail')
-           setTimeout(()=>{
-            toast.success('Data added SuccessFully')
-           },100)
-            
-            
-          } else {
-            toast.error('someThing wents wrong')
-          }
-        
-            } catch (error) {
-              console.log(error)
-              toast.error('something wents wrong in adding product');
-            }
+  const submitBtn = async (e) => {
+    e.preventDefault();
+    try {
+      const studentData = new FormData()
+      studentData.append("name", name);
+      studentData.append("fatherName", fatherName);
+      studentData.append("rollNumber", rollNumber);
+      studentData.append("age", age);
+      studentData.append("grade", grade);
+      studentData.append("address", address);
+      studentData.append("fee", fee);
+      studentData.append("photo", photo);
+      studentData.append("phone", phone);
+
+
+      const { data } = await axios.post(`https://my-school-backend.onrender.com/api/v1/student/updateStudent/${params.id}`, studentData)
+      if (data?.success) {
+        navigate('/admin/dashboard/Student-detail')
+        setTimeout(() => {
+          toast.success('Data added SuccessFully')
+        }, 100)
+
+
+      } else {
+        toast.error('someThing wents wrong')
+      }
+
+    } catch (error) {
+      console.log(error)
+      toast.error('something wents wrong in adding product');
+    }
 
   }
   useEffect(() => {
@@ -180,18 +180,18 @@ const UpdateStudent = () => {
                       />
                     </div>
                     <div className="mb-3">
-                      {photo?
-                       (
-                        <div className="text-center">
-                        <img src={URL.createObjectURL(photo)} alt="photo" className="img img-responsive" height={"200px"} />
-                      </div>
-                      ):
-                      (
-                        <div className="text-center">
-                          <img src={`http://localhost:5000/api/v1/student/get-student-photo/${params.id}`} alt="photo" className="img img-responsive" height={"200px"} />
-                        </div>
-                        
-                      )
+                      {photo ?
+                        (
+                          <div className="text-center">
+                            <img src={URL.createObjectURL(photo)} alt="photo" className="img img-responsive" height={"200px"} />
+                          </div>
+                        ) :
+                        (
+                          <div className="text-center">
+                            <img src={`https://my-school-backend.onrender.com/api/v1/student/get-student-photo/${params.id}`} alt="photo" className="img img-responsive" height={"200px"} />
+                          </div>
+
+                        )
                       }
                     </div>
                     <div className="mb-3">

@@ -10,14 +10,14 @@ const StudentDetailForTeachers
   const [privateInfo, setPrivateInfo] = useState(false);
   const [studentDetail, setStudentDetail] = useState([]);
   const altSrc=`/images/empty.jpeg`
-  const [imgSrc,setImgSrc]=useState(`http://localhost:5000/api/v1/student/get-student-photo/${params.id}`)
+  const [imgSrc,setImgSrc]=useState(`https://my-school-backend.onrender.com/api/v1/student/get-student-photo/${params.id}`)
 
   const onImgError=()=>{
     setImgSrc(altSrc)
   }
   const getData = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/v1/forTeachers/studentForTeacher/${params.id}`);
+      const { data } = await axios.get(`https://my-school-backend.onrender.com/api/v1/forTeachers/studentForTeacher/${params.id}`);
       if (data?.success) {
         setStudentDetail(data?.user)
       }

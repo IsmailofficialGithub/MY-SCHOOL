@@ -9,7 +9,7 @@ const NoticeDetailFull = () => {
   const [noticeDetail, setNoticeDetail] = useState({});
   const getNotice = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/v1/notice/getSingleNotice/${params.id}`);
+      const { data } = await axios.get(`https://my-school-backend.onrender.com/api/v1/notice/getSingleNotice/${params.id}`);
       if (data?.success) {
         setNoticeDetail(data?.data);
       }
@@ -28,9 +28,9 @@ const NoticeDetailFull = () => {
         <div className="row">
           <div className="col-md-4 m-5">
             <figure className="figure">
-             <img src={`http://localhost:5000/api/v1/notice/get-photo/${params.id}`} className="figure-img img-fluid rounded" alt="..." style={{height:'45vh',width:'45vh',objectFit:'cover'}}/>
-             <figcaption className="figure-caption text-end">{noticeDetail.title} picture</figcaption>
-           </figure>
+              <img src={`https://my-school-backend.onrender.com/api/v1/notice/get-photo/${params.id}`} className="figure-img img-fluid rounded" alt="..." style={{ height: '45vh', width: '45vh', objectFit: 'cover' }} />
+              <figcaption className="figure-caption text-end">{noticeDetail.title} picture</figcaption>
+            </figure>
             <button
               onClick={() => {
                 navigate("/admin/dashboard/notice-detail");
@@ -43,10 +43,10 @@ const NoticeDetailFull = () => {
             <h3>My School</h3>
             <hr />
             <h6>Name  :  {noticeDetail.title}</h6>
-           <h6>Category  :  {noticeDetail.catagory}</h6>
-           <h6>Valid for  :  {noticeDetail.date!= 1? noticeDetail.date:'Unlimited' }</h6>
-           <h6>Description  :<br/> <br/>  {(noticeDetail.description)}</h6>
-           
+            <h6>Category  :  {noticeDetail.catagory}</h6>
+            <h6>Valid for  :  {noticeDetail.date != 1 ? noticeDetail.date : 'Unlimited'}</h6>
+            <h6>Description  :<br /> <br />  {(noticeDetail.description)}</h6>
+
           </div>
         </div>
       </div>

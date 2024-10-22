@@ -24,7 +24,7 @@ const AddNotice = () => {
       noticeData.append("catagory", catagory);
       noticeData.append("photo", photo);
       noticeData.append("date", date);
-      const { data } = await axios.post("http://localhost:5000/api/v1/notice/addNotice", noticeData);
+      const { data } = await axios.post("https://my-school-backend.onrender.com/api/v1/notice/addNotice", noticeData);
       if (data?.success) {
         navigate("/admin/dashboard/notice-detail");
         setTimeout(() => {

@@ -7,10 +7,10 @@ import { ReportContext } from "../context/reportContext";
 
 const Report = () => {
   const params = useParams();
-  const [imgSrc, setImgSrc] = useState(`http://localhost:5000/api/v1/report/gettingPhoto/${params.id}`);
+  const [imgSrc, setImgSrc] = useState(`https://my-school-backend.onrender.com/api/v1/report/gettingPhoto/${params.id}`);
   const [reportData, setReportData] = useState([]);
   const [isReport, setIsReport] = useState(false);
-  const reportAvaliable=useContext(ReportContext)
+  const reportAvaliable = useContext(ReportContext)
   const apiId = JSON.parse(localStorage.getItem("auth")).user?.studentUserId;
   const altSrc = `/images/school.jpeg`;
 
@@ -20,7 +20,7 @@ const Report = () => {
 
   const gettingData = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/v1/report/getReport/${apiId}`);
+      const { data } = await axios.get(`https://my-school-backend.onrender.com/api/v1/report/getReport/${apiId}`);
       if (data?.message === "SuccessFully getting report") {
         setReportData(data?.data);
         setIsReport(true);
@@ -41,7 +41,7 @@ const Report = () => {
           <div className="col-md-4">
             <figure className="figure mt-5">
               <img src={imgSrc} className="figure-img img-fluid rounded" alt="No Photo is Add" style={{ height: "60vh", width: "60vh", objectFit: "cover" }} onError={onImgError} />
-              <figcaption className="figure-caption text-end">{} Report detail</figcaption>
+              <figcaption className="figure-caption text-end">{ } Report detail</figcaption>
             </figure>
           </div>
           <div className="col-md-8">

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Layout from "../../components/Layout";
@@ -43,7 +43,7 @@ const AddTeacher = () => {
         teacherData.append("answer", answer);
         teacherData.append("userId", userId);
 
-        const { data } = await axios.post("http://localhost:5000/api/v1/teacher/addTeacher", teacherData);
+        const { data } = await axios.post("https://my-school-backend.onrender.com/api/v1/teacher/addTeacher", teacherData);
         if (data?.success) {
           navigate("/admin/dashboard/teacher-detail");
         }
@@ -58,11 +58,11 @@ const AddTeacher = () => {
       toast.error("something wents wrong in adding product");
     }
 
-   
+
   };
 
-   // generating user Id randomly;
-   const generateUserId = (value) => {
+  // generating user Id randomly;
+  const generateUserId = (value) => {
     const randomNumber1 = Math.floor(Math.random() * 10000);
     const randomNumber2 = Math.floor(Math.random() * 10000);
     let formattedValue = value.replace(/\s+/g, '-');

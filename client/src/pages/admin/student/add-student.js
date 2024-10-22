@@ -37,7 +37,7 @@ const AddStudent = () => {
       studentData.append("password", password);
       studentData.append("answer", answer);
 
-      const { data } = await axios.post("http://localhost:5000/api/v1/student/add-student", studentData);
+      const { data } = await axios.post("https://my-school-backend.onrender.com/api/v1/student/add-student", studentData);
       if (data?.success) {
         navigate("/admin/dashboard/Student-detail");
 

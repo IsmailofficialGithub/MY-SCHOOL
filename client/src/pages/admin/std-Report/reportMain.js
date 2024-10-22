@@ -9,24 +9,24 @@ const ReportOption = () => {
   const params = useParams();
   const [exist, setExist] = useState("");
   // const context=ReportContext()
-  const submitDelete=async(e)=>{
+  const submitDelete = async (e) => {
     e.preventDefault();
-   let deleteValue=window.prompt('Type "Delete" to delete report')
-   if(deleteValue=== 'Delete'){
-    const {data}=await axios.delete(`http://localhost:5000/api/v1/report/deleteReport/${params.id}`)
-    if(data?.success){
-      toast.success('Delete Report successFully');
-      setExist('ok');
+    let deleteValue = window.prompt('Type "Delete" to delete report')
+    if (deleteValue === 'Delete') {
+      const { data } = await axios.delete(`https://my-school-backend.onrender.com/api/v1/report/deleteReport/${params.id}`)
+      if (data?.success) {
+        toast.success('Delete Report successFully');
+        setExist('ok');
+      }
+    } else {
+      toast.error('invalid Input')
     }
-   }else{
-    toast.error('invalid Input')
-   }
 
   }
 
   const checking = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/v1/report/checkingAvalible/${params.id}`);
+      const { data } = await axios.get(`https://my-school-backend.onrender.com/api/v1/report/checkingAvalible/${params.id}`);
       if (data?.success) {
         setExist("ok");
       } else {
@@ -49,8 +49,8 @@ const ReportOption = () => {
           <div className="col-md-8 select-report">
             {exist !== "ok" ? (
               <>
-                <button className="btn btn-secondary" onClick={()=>{navigate(`/admin/dashboard/FullReportDetail/${params.id}`)}}>Report Detail</button>
-                <button onClick={()=>{navigate(`/admin/dashboard/update-report/${params.id}`)}}>Report Update</button>
+                <button className="btn btn-secondary" onClick={() => { navigate(`/admin/dashboard/FullReportDetail/${params.id}`) }}>Report Detail</button>
+                <button onClick={() => { navigate(`/admin/dashboard/update-report/${params.id}`) }}>Report Update</button>
                 <button className="btn btn-danger" onClick={submitDelete}>Report Delete</button>
               </>
             ) : (

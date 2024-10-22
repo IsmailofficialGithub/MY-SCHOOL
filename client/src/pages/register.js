@@ -12,16 +12,16 @@ const Register = () => {
   const submitHandle = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(`http://localhost:5000/api/v1/auth/register`, {
+      const { data } = await axios.post(`https://my-school-backend.onrender.com/api/v1/auth/register`, {
         password,
         userId,
         answer,
       });
       if (data?.success) {
         navigate("/login");
-      setTimeout(()=>{
-        toast.success(data.message);
-      },100)
+        setTimeout(() => {
+          toast.success(data.message);
+        }, 100)
       } else {
         toast.error(data.message);
       }
@@ -47,7 +47,7 @@ const Register = () => {
           <form action method="post" className="form register__form" onSubmit={submitHandle}>
             <div className="form__field">
               <input
-              required='true'
+                required='true'
                 type="text"
                 placeholder="info@mailaddress.com"
                 className="form__input register__input register__input--email"
@@ -58,7 +58,7 @@ const Register = () => {
             </div>
             <div className="form__field">
               <input
-              required='true'
+                required='true'
                 type="password"
                 placeholder="••••••••••••"
                 className="form__input register__input register__input--password"
@@ -69,7 +69,7 @@ const Register = () => {
             </div>
             <div className="form__field">
               <input
-              required='true'
+                required='true'
                 type="text"
                 placeholder="Last name of Your Father"
                 className="form__input register__input register__input--password"

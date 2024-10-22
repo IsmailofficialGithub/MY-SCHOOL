@@ -10,7 +10,7 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const getAllModel = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/v1/admin/adminAll");
+      const { data } = await axios.get("https://my-school-backend.onrender.com/api/v1/admin/adminAll");
       if (data.message === "successFully getting all lengths") {
         setAllLength(data?.length);
         console.log(data?.length);

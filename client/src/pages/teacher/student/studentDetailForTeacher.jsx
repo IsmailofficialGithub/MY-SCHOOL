@@ -22,7 +22,7 @@ const StudentFullDetailforTeacher = () => {
   const handleOk = async () => {
     setIsModalOpen(false);
     try {
-      const { data } = await axios.post("http://localhost:5000/api/v1/student/searchStudent", searchInput);
+      const { data } = await axios.post("https://my-school-backend.onrender.com/api/v1/student/searchStudent", searchInput);
       if (data) {
         toast.success(data?.message);
         setStudentDetail(data?.data);
@@ -38,7 +38,7 @@ const StudentFullDetailforTeacher = () => {
   };
   const fetchStudent = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/v1/student/getAllStudent");
+      const { data } = await axios.get("https://my-school-backend.onrender.com/api/v1/student/getAllStudent");
       if (data?.students) {
         let user = data?.students;
         setStudentDetail(user);
@@ -49,7 +49,7 @@ const StudentFullDetailforTeacher = () => {
   };
   const filterApi = async (value) => {
     try {
-      const { data } = await axios.post(`http://localhost:5000/api/v1/student/classFilter/${value}`);
+      const { data } = await axios.post(`https://my-school-backend.onrender.com/api/v1/student/classFilter/${value}`);
       if (data?.students) {
         setStudentDetail(data?.students);
       }
@@ -71,7 +71,7 @@ const StudentFullDetailforTeacher = () => {
     let result = prompt(`please type "delete" to delete student`);
     if (result === "delete") {
       try {
-        const { data } = await axios.delete(`http://localhost:5000/api/v1/student/deleteStudent/${pId}`);
+        const { data } = await axios.delete(`https://my-school-backend.onrender.com/api/v1/student/deleteStudent/${pId}`);
         if (data?.success) {
           toast.success("deleted product successfully");
           fetchStudent();
@@ -136,7 +136,7 @@ const StudentFullDetailforTeacher = () => {
                     <tr>
                       <th scope="row">{index + 1}</th>
                       <td>
-                        <img src={`http://localhost:5000/api/v1/student/get-student-photo/${e._id}`} alt={`No Image `} width={"50px"} height={"50px"} style={{ objectFit: "fill" }}/>
+                        <img src={`https://my-school-backend.onrender.com/api/v1/student/get-student-photo/${e._id}`} alt={`No Image `} width={"50px"} height={"50px"} style={{ objectFit: "fill" }}/>
                       </td>
                       <td>{e.name}</td>
                       <td>{e.fatherName}</td>

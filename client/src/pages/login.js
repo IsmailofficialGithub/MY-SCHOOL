@@ -14,20 +14,20 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const { data } =await axios.put('http://localhost:5000/api/v1/auth/login',{
+      const { data } = await axios.put('https://my-school-backend.onrender.com/api/v1/auth/login', {
         password,
         userId,
       })
-      if(data?.success){
-        localStorage.setItem('auth',JSON.stringify(data));
+      if (data?.success) {
+        localStorage.setItem('auth', JSON.stringify(data));
         navigate('/')
-        setTimeout(()=>{
-        toast.success(data?.message);
-      },100)
-      }else{
+        setTimeout(() => {
+          toast.success(data?.message);
+        }, 100)
+      } else {
         toast.error(data?.message)
       }
-     
+
     } catch (error) {
       console.log(error);
       toast.error('User Not Found 404')
@@ -50,7 +50,7 @@ const Login = () => {
           <form action method="post" className="form register__form" onSubmit={submitHandle}>
             <div className="form__field">
               <input
-              required='true'
+                required='true'
                 type="text"
                 placeholder="info@mailaddress.com"
                 className="form__input register__input register__input--email"
@@ -61,7 +61,7 @@ const Login = () => {
             </div>
             <div className="form__field">
               <input
-              required='true'
+                required='true'
                 type="password"
                 placeholder="••••••••••••"
                 className="form__input register__input register__input--password"

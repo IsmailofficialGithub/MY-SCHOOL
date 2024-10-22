@@ -1,26 +1,26 @@
-import React ,{useEffect,useState}from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "./components/Layout";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const HomePage = () => {
   const navigate = useNavigate();
-const [noticeDetial,setNoticeDetail]=useState([])
+  const [noticeDetial, setNoticeDetail] = useState([])
 
-const gettingNotice=async()=>{
-  try {
-  const {data}=await axios.get('http://localhost:5000/api/v1/notice/getNotice')
-  if(data.success){
-    setNoticeDetail(data?.notice);
+  const gettingNotice = async () => {
+    try {
+      const { data } = await axios.get('https://my-school-backend.onrender.com/api/v1/notice/getNotice')
+      if (data.success) {
+        setNoticeDetail(data?.notice);
+      }
+
+    } catch (error) {
+      console.log(error)
+
+    }
   }
-    
-  } catch (error) {
-    console.log(error)
-    
-  }
-}
-useEffect(()=>{
-  gettingNotice()
-},[])
+  useEffect(() => {
+    gettingNotice()
+  }, [])
   return (
     <Layout>
       <>
@@ -32,7 +32,7 @@ useEffect(()=>{
           </div>
           <div className="carousel-inner">
             <div className="carousel-item active">
-              <img src="/images/1.jpg"  alt="college" style={{height:'70vh',width:'100%',objectFit:'cover'}}/>
+              <img src="/images/1.jpg" alt="college" style={{ height: '70vh', width: '100%', objectFit: 'cover' }} />
               <div className="carousel-caption d-none d-md-block " style={{ color: "red" }}>
                 <h1>MY SCHOOL</h1>
                 <h3 className="bold">Some representative placeholder content for the first slide.</h3>
@@ -43,14 +43,14 @@ useEffect(()=>{
               </div>
             </div>
             <div className="carousel-item">
-              <img src="/images/schoolok.jpg" className="d-block w-100" alt="..." style={{height:'70vh',width:'100%',objectFit:'cover'}}/>
+              <img src="/images/schoolok.jpg" className="d-block w-100" alt="..." style={{ height: '70vh', width: '100%', objectFit: 'cover' }} />
               <div className="carousel-caption d-none d-md-block">
                 <h3>Second slide label</h3>
                 <h5>Some representative placeholder content for the second slide.</h5>
               </div>
             </div>
             <div className="carousel-item">
-              <img src="/images/collage3.jpeg" className="d-block w-100" alt="..." style={{height:'70vh',width:'100%',objectFit:'cover'}}/>
+              <img src="/images/collage3.jpeg" className="d-block w-100" alt="..." style={{ height: '70vh', width: '100%', objectFit: 'cover' }} />
               <div className="carousel-caption d-none d-md-block">
                 <h5>Third slide label</h5>
                 <p>Some representative placeholder content for the third slide.</p>
@@ -126,24 +126,24 @@ useEffect(()=>{
           </div>
         </div>
 
-      {noticeDetial.length > 0 ? 
-      <>
-        <h1 className="text-center mt-5 ">Events And Notices</h1>
-        <div className="events-home mb-5">
-                {noticeDetial.map((e,index)=>(
-                 <div className="event-home-inner">
-                <div style={{height:"100%",marginBottom:"13px"}} className="img-div">
-                   <img src={`http://localhost:5000/api/v1/notice/get-photo/${e._id}`} alt="My school" width="100%" />
+        {noticeDetial.length > 0 ?
+          <>
+            <h1 className="text-center mt-5 ">Events And Notices</h1>
+            <div className="events-home mb-5">
+              {noticeDetial.map((e, index) => (
+                <div className="event-home-inner">
+                  <div style={{ height: "100%", marginBottom: "13px" }} className="img-div">
+                    <img src={`https://my-school-backend.onrender.com/api/v1/notice/get-photo/${e._id}`} alt="My school" width="100%" />
                   </div>
-                 <h3>{e.title}</h3>
-                 <p>{e.description.split('').slice(0, 60).join('')}...</p>
-                 <span onClick={()=>{navigate(`/notice-board-Detail/${e._id}`)}}>Read More</span>
-               </div>
-                ))}
-        </div>
-      </>
-      :
-      ''}
+                  <h3>{e.title}</h3>
+                  <p>{e.description.split('').slice(0, 60).join('')}...</p>
+                  <span onClick={() => { navigate(`/notice-board-Detail/${e._id}`) }}>Read More</span>
+                </div>
+              ))}
+            </div>
+          </>
+          :
+          ''}
       </>
     </Layout>
   );

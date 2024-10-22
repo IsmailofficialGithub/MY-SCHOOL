@@ -12,7 +12,7 @@ const TeacherFullDetail = () => {
 
   const getDetail = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/v1/teacher/singleTeacher/${params.id}`);
+      const { data } = await axios.get(`https://my-school-backend.onrender.com/api/v1/teacher/singleTeacher/${params.id}`);
       if (data?.success) {
         setTeacherDetail(data?.data);
       }
@@ -32,7 +32,7 @@ const TeacherFullDetail = () => {
         <div className="row">
           <div className="col-md-4 m-5">
             <figure className="figure">
-              <img src={`http://localhost:5000/api/v1/teacher/teacherPhoto/${params.id}`} className="figure-img img-fluid rounded" alt="..." style={{ height: "45vh", width: "45vh", objectFit: "cover" }} />
+              <img src={`https://my-school-backend.onrender.com/api/v1/teacher/teacherPhoto/${params.id}`} className="figure-img img-fluid rounded" alt="..." style={{ height: "45vh", width: "45vh", objectFit: "cover" }} />
               <figcaption className="figure-caption text-end">{teacherDetail.name} picture</figcaption>
             </figure>
             <button
@@ -57,15 +57,15 @@ const TeacherFullDetail = () => {
             <h6>Joining : {teacherDetail.created_at}</h6>
             <h4 className="mb-4">ID Card</h4>
             <figure className="figure text-center ">
-              <img src={`http://localhost:5000/api/v1/teacher/teacherIdCard/${params.id}`} className="figure-img img-fluid rounded" alt="..." style={{ height: "45vh", width: "45vh", objectFit: "cover" }} />
+              <img src={`https://my-school-backend.onrender.com/api/v1/teacher/teacherIdCard/${params.id}`} className="figure-img img-fluid rounded" alt="..." style={{ height: "45vh", width: "45vh", objectFit: "cover" }} />
               <figcaption className="figure-caption text-end">{teacherDetail.name} picture</figcaption>
             </figure>
-            {!privateInfo ? "" : 
-            <>
+            {!privateInfo ? "" :
+              <>
                 <h6>UserId  :  {teacherDetail.userId}</h6>
-              <h6>Password  :  {teacherDetail.password}</h6>
-              <h6>Reset Password Answer  :  {teacherDetail.answer}</h6>
-            </>
+                <h6>Password  :  {teacherDetail.password}</h6>
+                <h6>Reset Password Answer  :  {teacherDetail.answer}</h6>
+              </>
             }
             <button className="btn btn-danger" onClick={() => setPrivateInfo((prevPrivateInfo) => !prevPrivateInfo)}>
               {!privateInfo ? "Private Info" : "Hide Private Info"}
