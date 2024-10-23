@@ -22,19 +22,24 @@ dbConnect()
 dotenv.config()
 
 // middleware 
-app.use(cors()); 
-app.use(express.json()); 
+// app.use(cors()); 
+app.use(cors({
+  origin: 'https://my-school-3lk2.onrender.com/', // or your frontend domain
+  credentials: true,
+}));
+
+app.use(express.json());
 app.use(morgan('dev'));
 
 
 //routes
-app.use('/api/v1/auth',authRoute)
-app.use('/api/v1/student',studentRoute)
-app.use('/api/v1/teacher',teacherRoute)
-app.use('/api/v1/notice',noticeRoute)
-app.use('/api/v1/report',reportRoute)
-app.use('/api/v1/admin',adminRoute)
-app.use('/api/v1/forTeachers',forteacher)
+app.use('/api/v1/auth', authRoute)
+app.use('/api/v1/student', studentRoute)
+app.use('/api/v1/teacher', teacherRoute)
+app.use('/api/v1/notice', noticeRoute)
+app.use('/api/v1/report', reportRoute)
+app.use('/api/v1/admin', adminRoute)
+app.use('/api/v1/forTeachers', forteacher)
 
 
 

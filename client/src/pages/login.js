@@ -93,7 +93,7 @@ const Login = () => {
           </form>
           <p>
             I don't have an account?{" "}
-            <Link to={"/register"} className="link register__login-link">
+            <Link to={"/auth/register"} className="link register__login-link">
               Sign Up
             </Link>
           </p>

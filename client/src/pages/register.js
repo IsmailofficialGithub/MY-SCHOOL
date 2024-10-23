@@ -18,7 +18,7 @@ const Register = () => {
         answer,
       });
       if (data?.success) {
-        navigate("/login");
+        navigate("/auth/login");
         setTimeout(() => {
           toast.success(data.message);
         }, 100)
@@ -84,7 +84,7 @@ const Register = () => {
           </form>
           <p>
             Already have an account?{" "}
-            <Link to={"/login"} className="link register__login-link">
+            <Link to={"/auth/login"} className="link register__login-link">
               Log in
             </Link>
           </p>

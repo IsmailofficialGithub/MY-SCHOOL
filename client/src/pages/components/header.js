@@ -16,7 +16,7 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("auth");
-    navigate("/login");
+    navigate("/auth/login");
     setTimeout(() => {
       toast.success("Logout Successfully");
     }, 100);
@@ -141,12 +141,12 @@ const Header = () => {
               {!istoken && (
                 <>
                   <li className="nav-item ">
-                    <Link className="nav-link text-white" to={"/login"}>
+                    <Link className="nav-link text-white" to={"/auth/login"}>
                       Login
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link text-white" to={"/register"}>
+                    <Link className="nav-link text-white" to={"/auth/register"}>
                       Register
                     </Link>
                   </li>
