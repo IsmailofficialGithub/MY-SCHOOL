@@ -38,6 +38,7 @@ import StudentReportForTeacher from "./pages/teacher/student/studentReportForTea
 import AddReportForTeacher from "./pages/teacher/report/AddReportForTeacher";
 import ReportFullDetailForTeacher from "./pages/teacher/report/ReportFullDetailForTeacher";
 import UpdateReportForTeacher from "./pages/teacher/report/updateReportForTeacher";
+import AuthPrivate from "./pages/authPrivate";
 function App() {
   return (
     <>
@@ -45,13 +46,13 @@ function App() {
         <Route path="/admin" element={<PrivateRoute />}>
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="dashboard/Student-detail" element={<StudentDetail />} />
-          <Route path="dashboard/update-detail/:id" element={<UpdateStudent/>} />
-          <Route path="dashboard/fullStudent-detail/:id" element={<StudentFullDetail/>} />
+          <Route path="dashboard/update-detail/:id" element={<UpdateStudent />} />
+          <Route path="dashboard/fullStudent-detail/:id" element={<StudentFullDetail />} />
           <Route path="dashboard/add-student" element={<AddStudent />} />
           <Route path="dashboard/add-teacher" element={<AddTeacher />} />
           <Route path="dashboard/teacher-detail" element={<TeacherDetail />} />
-          <Route path="dashboard/update-teacher/:id" element={<UpdateTeacher/>} />
-          <Route path="dashboard/teacher-Full-Detail/:id" element={<TeacherFullDetail/>} />
+          <Route path="dashboard/update-teacher/:id" element={<UpdateTeacher />} />
+          <Route path="dashboard/teacher-Full-Detail/:id" element={<TeacherFullDetail />} />
           <Route path="dashboard/add-notice" element={<AddNotice />} />
           <Route path="dashboard/update-notice/:id" element={<UpdateNotice />} />
           <Route path="dashboard/notice-detail" element={<NoticeDetail />} />
@@ -63,23 +64,24 @@ function App() {
           <Route path="dashboard/UserInfo" element={<UserPage />} />
         </Route>
 
-        <Route path="/student" element={<StudentPrivate/>}>
-          <Route path="report/:id" element={<Report/>}/>
+        <Route path="/student" element={<StudentPrivate />}>
+          <Route path="report/:id" element={<Report />} />
         </Route>
-        <Route path="/teacher" element={<TeacherPrivate/>}>
-          <Route path="dashboard" element={<StudentDetailforTeacher/>}/>
-          <Route path="dashboard/report/:id" element={<StudentReportForTeacher/>}/>
-          <Route path="dashboard/detail/:id" element={<StudentDetailForTeachers/>}/>
-          <Route path="dashboard/add-student-report/:id" element={<AddReportForTeacher/>}/>
-          <Route path="dashboard/FullReportDetail/:id" element={<ReportFullDetailForTeacher/>}/>
-          <Route path="dashboard/update-report/:id" element={<UpdateReportForTeacher/>}/>
+        <Route path="/teacher" element={<TeacherPrivate />}>
+          <Route path="dashboard" element={<StudentDetailforTeacher />} />
+          <Route path="dashboard/report/:id" element={<StudentReportForTeacher />} />
+          <Route path="dashboard/detail/:id" element={<StudentDetailForTeachers />} />
+          <Route path="dashboard/add-student-report/:id" element={<AddReportForTeacher />} />
+          <Route path="dashboard/FullReportDetail/:id" element={<ReportFullDetailForTeacher />} />
+          <Route path="dashboard/update-report/:id" element={<UpdateReportForTeacher />} />
         </Route>
 
-        <Route path="/login" element={<Login />} />
-        {/* <Route path="/report" element={<Report />} /> */}
+        <Route path="auth" element={<AuthPrivate />}>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
         <Route path="/notice-board" element={<NoticeBoard />} />
         <Route path="/notice-board-Detail/:id" element={<NoticePageDetail />} />
-        <Route path="/register" element={<Register />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
