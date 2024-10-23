@@ -22,11 +22,8 @@ dbConnect()
 dotenv.config()
 
 // middleware 
-// app.use(cors()); 
-app.use(cors({
-  origin: 'https://my-school-3lk2.onrender.com/', // or your frontend domain
-  credentials: true,
-}));
+app.use(cors());
+
 
 app.use(express.json());
 app.use(morgan('dev'));

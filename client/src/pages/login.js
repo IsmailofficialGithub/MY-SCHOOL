@@ -30,12 +30,13 @@ const Login = () => {
           toast.success(data?.message);
         }, 100);
       } else {
+        setIsloading(false);
         toast.error(data?.message);
       }
     } catch (error) {
       console.log(error);
       toast.error("User Not Found 404");
-      isloading(false);
+      setIsloading(false);
     }
   };
   return (
@@ -84,12 +85,10 @@ const Login = () => {
               />
             </div>
 
-            {/* <div className="form__field"> */}
-            <button className="d-flex item-center justify-content-center btn btn-primary">
-              submit {isloading ? <LoaderIcon className="m-2" /> : ""}
+            <button className="d-flex item-center justify-content-center btn btn-primary" disabled={isloading ? true : false}>
+              Submit {isloading ? <LoaderIcon className="m-2" /> : ""}
             </button>
 
-            {/* </div> */}
           </form>
           <p>
             I don't have an account?{" "}
