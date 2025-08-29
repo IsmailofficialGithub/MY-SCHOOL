@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "./components/Layout";
 import axios from "axios";
-import toast from "react-hot-toast";
+import toast, { LoaderIcon } from "react-hot-toast";
 import { useNavigate, Link } from "react-router-dom";
 const Register = () => {
   const [password, setPassword] = useState("");
@@ -14,7 +14,10 @@ const Register = () => {
     e.preventDefault();
     setloading(true)
     try {
-      const { data } = await axios.post(`http://localhost:3001/api/v1/auth/register`, {
+      if(password.length <6){
+       return toast.error("Password must be atleast 6 word")
+      }
+      const { data } = await axios.post(`https://my-school-backend.onrender.com/api/v1/auth/register`, {
         password,
         userId,
         answer,
@@ -48,9 +51,10 @@ const Register = () => {
             <path fill="url(#a)" d="M215 214.9c-83.6 123.5-137.3 200.8-137.3 275.9 0 75.2 61.4 136.1 137.3 136.1s137.3-60.9 137.3-136.1c0-75.1-53.7-152.4-137.3-275.9z" />
           </svg>
           <h2 className="heading">Sign Up</h2>
-          <form action method="post" className="form register__form" onSubmit={submitHandle}>
-            <div className="form__field">
+          <form action method="post" className="form register__form" onSubmit={submitHandle} >
+            <div className="form__field" >
               <input
+              style={{color:"white"}}
                 required='true'
                 type="text"
                 placeholder="info@mailaddress.com"
@@ -62,6 +66,8 @@ const Register = () => {
             </div>
             <div className="form__field">
               <input
+              style={{color:"white"}}
+
                 required='true'
                 type="password"
                 placeholder="••••••••••••"
@@ -73,6 +79,8 @@ const Register = () => {
             </div>
             <div className="form__field">
               <input
+              style={{color:"white"}}
+
                 required='true'
                 type="text"
                 placeholder="Last name of Your Father"
@@ -82,9 +90,10 @@ const Register = () => {
                 }}
               />
             </div>
-            <div className="form__field">
-              <input type="submit" defaultValue="Sign Up" className="form__submit register__submit" />
-            </div>
+              <button className="d-flex item-center justify-content-center btn btn-primary" disabled={loading ? true : false}>
+                          Submit 
+                          {loading ? <LoaderIcon className="m-2" /> : ""}
+                        </button>
           </form>
           <p>
             Already have an account?{" "}

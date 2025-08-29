@@ -3,7 +3,6 @@ import Layout from "./components/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate, Link } from "react-router-dom";
-import { Loader } from "rsuite";
 import { LoaderIcon } from "react-hot-toast";
 
 const Login = () => {
@@ -18,7 +17,7 @@ const Login = () => {
 
     try {
       setIsloading(true);
-      const { data } = await axios.put("http://localhost:3001/api/v1/auth/login", {
+      const { data } = await axios.put("https://my-school-backend.onrender.com/api/v1/auth/login", {
         password,
         userId,
       });
