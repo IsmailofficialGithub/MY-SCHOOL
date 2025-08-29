@@ -22,7 +22,12 @@ dbConnect()
 dotenv.config()
 
 // middleware 
-app.use(cors());
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}));
 
 
 app.use(express.json());
@@ -39,11 +44,15 @@ app.use('/api/v1/admin', adminRoute)
 app.use('/api/v1/forTeachers', forteacher)
 
 
+app.get("/",(req,res)=>{
+    res.send("<h1>Welcome to MY-SCHOOL</h1>")
+})
 
 
 
 
-const PORT = process.env.PORT || 3000;
+
+const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => {
   console.log(colors.bgMagenta(`Server is running on http://localhost:${PORT}`));
 });

@@ -57,9 +57,9 @@ const Header = () => {
   }, []);
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-black d-flex text-white  ">
+      <nav className="navbar navbar-expand-lg  d-flex text-white  ">
         <div className="container-fluid">
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <button style={{color:"black",width:"10%" ,background:"gray"}} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">

@@ -7,12 +7,14 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [userId, SetUserId] = useState("");
   const [answer, setAnswer] = useState("");
+  const [loading,setloading]=useState(false);
   const navigate = useNavigate();
 
   const submitHandle = async (e) => {
     e.preventDefault();
+    setloading(true)
     try {
-      const { data } = await axios.post(`https://my-school-backend.onrender.com/api/v1/auth/register`, {
+      const { data } = await axios.post(`http://localhost:3001/api/v1/auth/register`, {
         password,
         userId,
         answer,
@@ -27,6 +29,8 @@ const Register = () => {
       }
     } catch (error) {
       console.log(error);
+    }finally{
+      setloading(false)
     }
   };
 
