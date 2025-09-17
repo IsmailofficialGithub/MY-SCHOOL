@@ -17,7 +17,7 @@ const Login = () => {
 
     try {
       setIsloading(true);
-      const { data } = await axios.put("https://my-school-backend.onrender.com/api/v1/auth/login", {
+      const { data } = await axios.put(`${process.env.REACT_APP_API_URL}/api/v1/auth/login`, {
         password,
         userId,
       });

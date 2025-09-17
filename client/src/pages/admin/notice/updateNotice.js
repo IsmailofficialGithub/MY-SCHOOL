@@ -17,7 +17,7 @@ const UpdateNotice = () => {
 
   const getData = async () => {
     try {
-      const { data } = await axios.get(`https://my-school-backend.onrender.com/api/v1/notice/getSingleNotice/${params.id}`)
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/notice/getSingleNotice/${params.id}`)
       setTitle(data?.data.title)
       setDescription(data?.data.description)
       setDate(data?.data.date)
@@ -42,7 +42,7 @@ const UpdateNotice = () => {
       updateData.append('catagory', catagory)
       updateData.append('date', date)
       updateData.append('photo', photo)
-      const { data } = await axios.post(`https://my-school-backend.onrender.com/api/v1/notice/updateNotice/${params.id}`, updateData)
+      const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/notice/updateNotice/${params.id}`, updateData)
 
       if (data.success) {
         navigate('/admin/dashboard/notice-detail')
@@ -138,7 +138,7 @@ const UpdateNotice = () => {
                         ) :
                         (
                           <div className="text-center">
-                            <img src={`https://my-school-backend.onrender.com/api/v1/notice/get-photo/${params.id}`} alt="NO PHOTO IS ADDED" className="img img-responsive" height={"200px"} />
+                            <img src={`${process.env.REACT_APP_API_URL}/api/v1/notice/get-photo/${params.id}`} alt="NO PHOTO IS ADDED" className="img img-responsive" height={"200px"} />
                           </div>
 
                         )

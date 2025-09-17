@@ -7,13 +7,13 @@ import axios from "axios";
 const NoticePageDetail = () => {
   const params = useParams();
   const [noticeDetail, setNoticeDetail] = useState([])
-  const [photoUrl, setPhotoUrl] = useState(`https://my-school-backend.onrender.com/api/v1/notice/get-photo/${params.id}`)
+  const [photoUrl, setPhotoUrl] = useState(`${process.env.REACT_APP_API_URL}/api/v1/notice/get-photo/${params.id}`)
   const imgError = () => {
     setPhotoUrl('/images/school.jpeg')
   }
   const getData = async () => {
     try {
-      const { data } = await axios.get(`https://my-school-backend.onrender.com/api/v1/notice/getSingleNotice/${params.id}`)
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/notice/getSingleNotice/${params.id}`)
       if (data?.success) {
         setNoticeDetail(data?.data)
       }

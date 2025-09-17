@@ -13,22 +13,22 @@ const Footer = () => {
       <div className="col-xs-6 col-md-3">
         <h6>Categories</h6>
         <ul className="footer-links">
-          <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
-          <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
-          <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
-          <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
-          <li><a href="http://scanfcode.com/category/android/">Android</a></li>
-          <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
+          <li><a href="/">C</a></li>
+          <li><a href="/">UI Design</a></li>
+          <li><a href="/">PHP</a></li>
+          <li><a href="/">Java</a></li>
+          <li><a href="/">Android</a></li>
+          <li><a href="/">Templates</a></li>
         </ul>
       </div>
       <div className="col-xs-6 col-md-3">
         <h6>Quick Links</h6>
         <ul className="footer-links">
-          <li><a href="http://scanfcode.com/about/">About Us</a></li>
-          <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
-          <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
-          <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
-          <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+          <li><a href="/">Contribute</a></li>
+          <li><a href="/">Privacy Policy</a></li>
+          <li><a href="/">Sitemap</a></li>
         </ul>
       </div>
     </div>
@@ -42,7 +42,7 @@ const Footer = () => {
         </p>
       </div>
       <div className="col-md-4 col-sm-6 col-xs-12">
-        <ul className="social-icons">
+        <ul className="social-icons" style={{color:"white"}}>
           <li><a className="facebook" href="#"><i className="fa fa-facebook" /></a></li>
           <li><a className="twitter" href="#"><i className="fa fa-twitter" /></a></li>
           <li><a className="dribbble" href="#"><i className="fa fa-dribbble" /></a></li>

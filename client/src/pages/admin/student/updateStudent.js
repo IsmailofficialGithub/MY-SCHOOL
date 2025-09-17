@@ -18,7 +18,7 @@ const UpdateStudent = () => {
   const [photo, setphoto] = useState("");
   const navigate = useNavigate();
   const getData = async () => {
-    const { data } = await axios.get(`https://my-school-backend.onrender.com/api/v1/student/get-single-student/${params.id}`);
+    const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/student/get-single-student/${params.id}`);
     if (data) {
       let student = data?.user;
       setName(student.name);
@@ -48,7 +48,7 @@ const UpdateStudent = () => {
       studentData.append("phone", phone);
 
 
-      const { data } = await axios.post(`https://my-school-backend.onrender.com/api/v1/student/updateStudent/${params.id}`, studentData)
+      const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/student/updateStudent/${params.id}`, studentData)
       if (data?.success) {
         navigate('/admin/dashboard/Student-detail')
         setTimeout(() => {
@@ -188,7 +188,7 @@ const UpdateStudent = () => {
                         ) :
                         (
                           <div className="text-center">
-                            <img src={`https://my-school-backend.onrender.com/api/v1/student/get-student-photo/${params.id}`} alt="photo" className="img img-responsive" height={"200px"} />
+                            <img src={`${process.env.REACT_APP_API_URL}/api/v1/student/get-student-photo/${params.id}`} alt="photo" className="img img-responsive" height={"200px"} />
                           </div>
 
                         )

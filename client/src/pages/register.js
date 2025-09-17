@@ -17,7 +17,7 @@ const Register = () => {
       if(password.length <6){
        return toast.error("Password must be atleast 6 word")
       }
-      const { data } = await axios.post(`https://my-school-backend.onrender.com/api/v1/auth/register`, {
+      const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/auth/register`, {
         password,
         userId,
         answer,

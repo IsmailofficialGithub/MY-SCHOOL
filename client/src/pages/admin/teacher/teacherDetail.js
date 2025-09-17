@@ -10,7 +10,7 @@ const TeacherDetail = () => {
   const navigate = useNavigate();
   const fetchTeacher = async () => {
     try {
-      const { data } = await axios.get("https://my-school-backend.onrender.com/api/v1/teacher/allTeacher");
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/teacher/allTeacher`);
       if (data?.teachers) {
         let user = data?.teachers;
         setTeacher(user);
@@ -28,7 +28,7 @@ const TeacherDetail = () => {
     let result = prompt(`please type "delete" to delete student`);
     if (result === "delete") {
       try {
-        const { data } = await axios.delete(`https://my-school-backend.onrender.com/api/v1/teacher/deleteTeacher/${pId}`);
+        const { data } = await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/teacher/deleteTeacher/${pId}`);
         if (data?.success) {
           toast.success("deleted product successfully");
           fetchTeacher();
@@ -66,7 +66,7 @@ const TeacherDetail = () => {
                     <tr>
                       <th scope="row">{index + 1}</th>
                       <td>
-                        <img src={`https://my-school-backend.onrender.com/api/v1/teacher/teacherPhoto/${e._id}`} alt={`Student ${e.name}`} width={"50px"} height={"50px"} style={{ objectFit: "fill" }} />
+                        <img src={`${process.env.REACT_APP_API_URL}/api/v1/teacher/teacherPhoto/${e._id}`} alt={`Student ${e.name}`} width={"50px"} height={"50px"} style={{ objectFit: "fill" }} />
                       </td>
                       <td>{e.name}</td>
                       <td>{e.subject}</td>

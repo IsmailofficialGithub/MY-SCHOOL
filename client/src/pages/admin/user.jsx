@@ -8,7 +8,7 @@ const UserPage = () => {
 
      const getUser=async()=>{
           try {
-               const {data}=await axios.get('https://my-school-backend.onrender.com/api/v1/admin/allUser')
+               const {data}=await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/admin/allUser`)
                if(data?.success){
                     setUser(data?.data)
                }

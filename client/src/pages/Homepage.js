@@ -8,7 +8,7 @@ const HomePage = () => {
 
   const gettingNotice = async () => {
     try {
-      const { data } = await axios.get('https://my-school-backend.onrender.com/api/v1/notice/getNotice')
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/notice/getNotice`)
       if (data.success) {
         setNoticeDetail(data?.notice);
       }
@@ -133,7 +133,7 @@ const HomePage = () => {
               {noticeDetial.map((e, index) => (
                 <div className="event-home-inner">
                   <div style={{ height: "100%", marginBottom: "13px" }} className="img-div">
-                    <img src={`https://my-school-backend.onrender.com/api/v1/notice/get-photo/${e._id}`} alt="My school" width="100%" />
+                    <img src={`${process.env.REACT_APP_API_URL}/api/v1/notice/get-photo/${e._id}`} alt="My school" width="100%" />
                   </div>
                   <h3>{e.title}</h3>
                   <p>{e.description.split('').slice(0, 60).join('')}...</p>

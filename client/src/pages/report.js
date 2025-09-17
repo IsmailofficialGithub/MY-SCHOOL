@@ -7,7 +7,7 @@ import { ReportContext } from "../context/reportContext";
 
 const Report = () => {
   const params = useParams();
-  const [imgSrc, setImgSrc] = useState(`https://my-school-backend.onrender.com/api/v1/report/gettingPhoto/${params.id}`);
+  const [imgSrc, setImgSrc] = useState(`${process.env.REACT_APP_API_URL}/api/v1/report/gettingPhoto/${params.id}`);
   const [reportData, setReportData] = useState([]);
   const [isReport, setIsReport] = useState(false);
   const reportAvaliable = useContext(ReportContext)
@@ -20,7 +20,7 @@ const Report = () => {
 
   const gettingData = async () => {
     try {
-      const { data } = await axios.get(`https://my-school-backend.onrender.com/api/v1/report/getReport/${apiId}`);
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/report/getReport/${apiId}`);
       if (data?.message === "SuccessFully getting report") {
         setReportData(data?.data);
         setIsReport(true);

@@ -12,7 +12,7 @@ const NoticeBoard = () => {
 
   const getNotice = async () => {
     try {
-      const { data } = await axios.get('https://my-school-backend.onrender.com/api/v1/notice/getNotice');
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/notice/getNotice`);
       if (data?.success) {
         setNotice(data?.notice);
       }
@@ -48,7 +48,7 @@ const NoticeBoard = () => {
                     {notice?.map((e) => (
                       <div className="card" style={{ width: '17rem', height: "30rem" }} key={e._id}>
                         <div style={{ height: "250px" }} className='img-div '>
-                          <img src={`https://my-school-backend.onrender.com/api/v1/notice/get-photo/${e._id}`} className="card-img-top" alt="No Images is Add By Admin" height='100%' />
+                          <img src={`${process.env.REACT_APP_API_URL}/api/v1/notice/get-photo/${e._id}`} className="card-img-top" alt="No Images is Add By Admin" height='100%' />
                         </div>
                         <div style={{ height: "30px", marginTop: "10px", marginLeft: "15px" }}>
                           <h5 className="card-title">{e.title}</h5>

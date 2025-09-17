@@ -10,7 +10,7 @@ const StudentProvider = ({ children }) => {
 
   const fetchStudent = async () => {
     try {
-      const { data } = await axios.get("https://my-school-backend.onrender.com/api/v1/student/getAllStudent");
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/student/getAllStudent`);
       if (data?.students) {
         let user = data?.students;
         setStudentDetail(user);

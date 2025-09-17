@@ -15,7 +15,7 @@ const NoticeDetail = () => {
 
   const getNotice = async () => {
     try {
-      const { data } = await axios.get("https://my-school-backend.onrender.com/api/v1/notice/getNotice");
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/notice/getNotice`);
       if (data?.success) {
         setNotice(data?.notice);
       }
@@ -28,7 +28,7 @@ const NoticeDetail = () => {
     let prompt = window.prompt('Type "Delete" to delete Notice');
     if (prompt === "Delete") {
       try {
-        const { data } = await axios.delete(`https://my-school-backend.onrender.com/api/v1/notice/deleteNotice/${id}`);
+        const { data } = await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/notice/deleteNotice/${id}`);
         if (data?.success) {
           toast.success("Delete notice successfully");
           getNotice();

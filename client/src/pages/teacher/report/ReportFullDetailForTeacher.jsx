@@ -12,7 +12,7 @@ const ReportFullDetailForTeacher = () => {
 
   const getData = async () => {
     try {
-      const { data } = await axios.get(`https://my-school-backend.onrender.com/api/v1/report/getReport/${params.id}`);
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/report/getReport/${params.id}`);
       if (data?.success) {
         setReportDetail(data?.data);
       }
@@ -32,7 +32,7 @@ const ReportFullDetailForTeacher = () => {
         <div className="row">
           <div className="col-md-4 m-5">
             <figure className="figure">
-              <img src={`https://my-school-backend.onrender.com/api/v1/report/gettingPhoto/${params.id}`} className="figure-img img-fluid rounded" alt="No Photo is Add" style={{ height: "45vh", width: "45vh", objectFit: "cover" }} />
+              <img src={`${process.env.REACT_APP_API_URL}/api/v1/report/gettingPhoto/${params.id}`} className="figure-img img-fluid rounded" alt="No Photo is Add" style={{ height: "45vh", width: "45vh", objectFit: "cover" }} />
               <figcaption className="figure-caption text-end">{} Report detail</figcaption>
             </figure>
             <Link to={`http://localhost:3000/teacher/dashboard/report/${params.id}`}><button>Back</button></Link>

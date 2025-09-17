@@ -43,7 +43,7 @@ const AddTeacher = () => {
         teacherData.append("answer", answer);
         teacherData.append("userId", userId);
 
-        const { data } = await axios.post("https://my-school-backend.onrender.com/api/v1/teacher/addTeacher", teacherData);
+        const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/teacher/addTeacher`, teacherData);
         if (data?.success) {
           navigate("/admin/dashboard/teacher-detail");
         }

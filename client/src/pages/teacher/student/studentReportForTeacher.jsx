@@ -13,7 +13,7 @@ const StudentReportForTeacher = () => {
     e.preventDefault();
    let deleteValue=window.prompt('Type "Delete" to delete report')
    if(deleteValue=== 'Delete'){
-    const {data}=await axios.delete(`https://my-school-backend.onrender.com/api/v1/report/deleteReport/${params.id}`)
+    const {data}=await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/report/deleteReport/${params.id}`)
     if(data?.success){
       toast.success('Delete Report successFully');
       setExist('ok');
@@ -26,7 +26,7 @@ const StudentReportForTeacher = () => {
 
   const checking = async () => {
     try {
-      const { data } = await axios.get(`https://my-school-backend.onrender.com/api/v1/report/checkingAvalible/${params.id}`);
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/report/checkingAvalible/${params.id}`);
       if (data?.success) {
         setExist("ok");
       } else {

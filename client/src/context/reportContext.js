@@ -16,7 +16,7 @@ const ReportProvider = ({ children }) => {
       let id = studentId?.user?._id;
       if (id) {
 
-        const { data } = await axios.put('https://my-school-backend.onrender.com/api/v1/report/isReportAvaliable', { studentId: id })
+        const { data } = await axios.put(`${process.env.REACT_APP_API_URL}/api/v1/report/isReportAvaliable`, { studentId: id })
         if (data?.success) {
           setIsReportAvaliable(data?.message)
 
