@@ -19,3 +19,9 @@ Thumbs.db
 
 # Environment variables
 .env
+
+
+#docker 
+.dockerignore
+Dockerfile
+docker-compose.yaml

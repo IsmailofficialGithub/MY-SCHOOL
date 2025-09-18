@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  school-backend:
+    build: ./backend
+    # container_name: school-backend-container
+    restart : always
+    environment:
+      PORT: 3001
+      JWT_SECRET: 6363cb4b0fsdfsdlklldss360da444baf0e7cda9c9ef89abde3b4c94687a6bbed3a6a3ef25e482de354d26e94a7ccdec76317e86dca733c44c56b96495034610154f15a5ae58
+      MONGO_URL: "mongodb+srv://username:password@cluster0.d3clh8u.mongodb.net/my-school?retryWrites=true&w=majority&appName=Cluster0"
+    ports:
+      - "3001:3001"
+
+
+  school-client:
+    # container_name: school-client-container
+    build: ./client
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_API_URL : http://localhost:3001
+    depends_on:
+      - school-backend
