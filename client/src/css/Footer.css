@@ -1,0 +1,188 @@
+.school-footer {
+  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 3rem 0 1rem;
+  margin-top: auto;
+}
+
+.footer-heading {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  font-size: 1.2rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-heading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+}
+
+.footer-about {
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.footer-contact p {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.footer-contact i {
+  margin-right: 10px;
+  width: 16px;
+  color: #fff;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.7rem;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: #fff;
+  transform: translateX(5px);
+}
+
+.footer-newsletter-text {
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+
+.newsletter-form .input-group {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.newsletter-form .form-control {
+  border: none;
+  border-radius: 4px 0 0 4px;
+  padding: 0.75rem;
+  height: auto;
+}
+
+.newsletter-form .btn-subscribe {
+  background: #0a58ca;
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  padding: 0.75rem 1rem;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.newsletter-form .btn-subscribe:hover {
+  background: #084298;
+}
+
+.footer-social {
+  margin-top: 1.5rem;
+}
+
+.social-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
+}
+
+.footer-divider {
+  border-color: rgba(255, 255, 255, 0.2);
+  margin: 2rem 0 1.5rem;
+}
+
+.copyright-text {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-bottom-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-bottom-links a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.footer-bottom-links a:hover {
+  color: #fff;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .school-footer {
+    text-align: center;
+  }
+  
+  .footer-heading::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .footer-bottom-links {
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .newsletter-form .input-group {
+    flex-direction: column;
+  }
+  
+  .newsletter-form .form-control {
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .newsletter-form .btn-subscribe {
+    border-radius: 4px;
+  }
+  
+  .social-icons {
+    justify-content: center;
+  }
+}

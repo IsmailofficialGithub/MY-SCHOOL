@@ -1,18 +1,43 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { ReportContext } from "../../context/reportContext";
-import { ClockCircleOutlined } from "@ant-design/icons";
+import { ClockCircleOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
 import { Badge } from "antd";
+import "../../css/Header.css";
 
 const Header = () => {
   const navigate = useNavigate();
-  const [istoken, setIsToken] = useState(false);
-  const [role, setRole] = useState(false);
-  const [admin, setAdmin] = useState(false);
-  const [isStudent, setIsStudent] = useState(false);
-  const [userId, setUserId] = useState("");
-  const reportAvaliable = useContext(ReportContext);
+  const [isToken, setIsToken] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const [isNavCollapsed, setIsNavCollapsed] = useState(true);
+  const reportAvailable = useContext(ReportContext);
+
+  // Handle nav collapse
+  const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
+
+  // Single useEffect to handle all user data
+  useEffect(() => {
+    const authData = JSON.parse(localStorage.getItem("auth"));
+    if (authData) {
+      setUserData(authData.user);
+      setIsToken(true);
+    } else {
+      setUserData(null);
+      setIsToken(false);
+    }
+  }, []);
+
+  // Use useMemo for derived values to avoid recalculating
+  const { isAdmin, isStudent, hasDashboard } = useMemo(() => {
+    if (!userData) return { isAdmin: false, isStudent: false, hasDashboard: false };
+    
+    return {
+      isAdmin: userData.role === 3,
+      isStudent: userData.role === 1,
+      hasDashboard: userData.role > 1 // Assuming roles 2 and 3 have dashboards
+    };
+  }, [userData]);
 
   const handleLogout = () => {
     localStorage.removeItem("auth");
@@ -21,142 +46,131 @@ const Header = () => {
       toast.success("Logout Successfully");
     }, 100);
   };
-  useEffect(() => {
-    const admin = JSON.parse(localStorage.getItem("auth"));
-    setUserId(admin?.user?._id);
-    if (admin?.user?.role === 3) {
-      setAdmin(true);
-    } else {
-      setAdmin(false);
-    }
-  }, []);
 
-  useEffect(() => {
-    const token = localStorage.getItem("auth");
-    if (token) {
-      setIsToken(true);
-    } else {
-      setIsToken(false);
-    }
-  }, []);
-  useEffect(() => {
-    const localUser = JSON.parse(localStorage.getItem("auth"));
-    if (localUser?.user?.role === 0 || localUser?.user?.role === 1) {
-      setRole(false);
-    } else {
-      setRole(true);
-    }
-  }, []);
-  useEffect(() => {
-    const student = JSON.parse(localStorage.getItem("auth"));
-    if (student?.user?.role === 1) {
-      setIsStudent(true);
-    } else {
-      setIsStudent(false);
-    }
-  }, []);
   return (
-    <>
-      <nav className="navbar navbar-expand-lg  d-flex text-white  ">
+    <header className="custom-header">
+      <nav className="navbar navbar-expand-lg navbar-dark">
         <div className="container-fluid">
-          <button style={{color:"black",width:"10%" ,background:"gray"}} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon" />
+          <Link className="navbar-brand" to="/">
+            <span className="brand-text">MY SCHOOL</span>
+          </Link>
+          
+          <button 
+            className="navbar-toggler" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#navbarContent"
+            aria-controls="navbarContent" 
+            aria-expanded={!isNavCollapsed ? true : false} 
+            aria-label="Toggle navigation"
+            onClick={handleNavCollapse}
+          >
+            <MenuOutlined />
           </button>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <Link className="navbar-brand text-white" to={"/"}>
-              MY SCHOOL
-            </Link>
+          
+          <div className={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active text-white" aria-current="page" to={"/"}>
+                <Link className="nav-link" to="/" onClick={() => setIsNavCollapsed(true)}>
                   Home
                 </Link>
               </li>
-              {istoken && (
+              
+              {isToken ? (
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link active text-white" aria-current="page" to={"/notice-board"}>
+                    <Link className="nav-link" to="/notice-board" onClick={() => setIsNavCollapsed(true)}>
                       Notice Board
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link text-white" to={"/about"}>
-                      About us
+                    <Link className="nav-link" to="/about" onClick={() => setIsNavCollapsed(true)}>
+                      About Us
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link text-white" to={"/contact"}>
+                    <Link className="nav-link" to="/contact" onClick={() => setIsNavCollapsed(true)}>
                       Contact Us
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link text-white" to={"/qna"}>
-                      Qna
+                    <Link className="nav-link" to="/qna" onClick={() => setIsNavCollapsed(true)}>
+                      Q&A
                     </Link>
                   </li>
-                  {isStudent ? (
-                    <>
-                      {reportAvaliable === "report is available for this user" ? (
+                  
+                  {isStudent && (
+                    <li className="nav-item">
+                      {reportAvailable === "report is available for this user" ? (
                         <Badge
                           count={
                             <ClockCircleOutlined
                               style={{
-                                color: "#f5222d",
-                                marginTop: "5px",
+                                color: "#fff",
+                                backgroundColor: "#ff4d4f",
+                                borderRadius: "50%",
+                                fontSize: "10px",
+                                width: "16px",
+                                height: "16px",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center"
                               }}
                             />
-                          }>
-                          <li className="nav-item">
-                            <Link className="nav-link text-white" to={`/student/report/${userId}`}>
-                              <p style={{ fontSize: "19px" }}>Report</p>
-                            </Link>
-                          </li>
+                          }
+                        >
+                          <Link className="nav-link" to={`/student/report/${userData?._id}`} onClick={() => setIsNavCollapsed(true)}>
+                            Report
+                          </Link>
                         </Badge>
                       ) : (
-                        <Link className="nav-link text-white" to={`/student/report/${userId}`}>
-                          <p>Report</p>
+                        <Link className="nav-link" to={`/student/report/${userData?._id}`} onClick={() => setIsNavCollapsed(true)}>
+                          Report
                         </Link>
                       )}
-                    </>
-                  ) : (
-                    ""
+                    </li>
                   )}
-                  {role ? (
+                  
+                  {hasDashboard && (
                     <li className="nav-item">
-                      <Link className="nav-link text-white" to={`/${admin ? "admin" : "teacher"}/dashboard`}>
+                      <Link className="nav-link dashboard-link" to={`/${isAdmin ? "admin" : "teacher"}/dashboard`} onClick={() => setIsNavCollapsed(true)}>
                         Dashboard
                       </Link>
                     </li>
-                  ) : (
-                    ""
                   )}
-                  <li className="nav-item" onClick={handleLogout}>
-                    <Link className="nav-link text-white" to={""}>
-                      LogOut
-                    </Link>
+                  
+                  <li className="nav-item">
+                    <button className="nav-link logout-btn" onClick={handleLogout}>
+                      Logout
+                    </button>
                   </li>
                 </>
-              )}
-
-              {!istoken && (
+              ) : (
                 <>
-                  <li className="nav-item ">
-                    <Link className="nav-link text-white" to={"/auth/login"}>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/auth/login" onClick={() => setIsNavCollapsed(true)}>
                       Login
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link text-white" to={"/auth/register"}>
+                    <Link className="nav-link" to="/auth/register" onClick={() => setIsNavCollapsed(true)}>
                       Register
                     </Link>
                   </li>
                 </>
               )}
             </ul>
+            
+            {isToken && userData && (
+              <div className="user-info">
+                <UserOutlined className="me-2" />
+                <span className="welcome-text">Welcome, {userData.name}</span>
+              </div>
+            )}
           </div>
         </div>
       </nav>
-    </>
+    </header>
   );
 };
 
